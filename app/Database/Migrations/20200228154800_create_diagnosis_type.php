@@ -1,8 +1,8 @@
 <?php namespace App\Database\Migrations;
 
-class CreateVisits extends \CodeIgniter\Database\Migration {
+class CreateDiagnosisType extends \CodeIgniter\Database\Migration {
 
-    private $table = 'visits';
+    private $table = 'diagnosis_type';
 
     public function up()
     {
@@ -13,16 +13,14 @@ class CreateVisits extends \CodeIgniter\Database\Migration {
           'unsigned'  => TRUE,
           'auto_increment' => TRUE
         ],
-        'patient_id' => [
-          'type' => 'BIGINT',
+        'name' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255',
           'comment' => ''
         ],
-        'start_date' => [
-          'type' => 'DATETIME',
-          'comment' => ''
-        ],
-        'end_date' => [
-          'type' => 'DATETIME',
+        'description' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255',
           'comment' => ''
         ],
         'status' => [
