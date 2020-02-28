@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\ModulesModel;
-use Modules\Documents\Models\DocumentTypesModel;
+// use Modules\Documents\Models\DocumentTypesModel;
 
 /**
  * Class BaseController
@@ -66,11 +66,11 @@ class BaseController extends Controller
 			$this->permissions = $model_permission->like('allowed_roles', $_SESSION['rid'])->findAll();
 			$this->modules = $model_module->findAll();
 
-			$model_doc_type = new DocumentTypesModel();
+			// $model_doc_type = new DocumentTypesModel();
 
 			$_SESSION['appmodules'] = $this->modules;
 			$_SESSION['userPermmissions'] = $this->permissions;
-			$_SESSION['doctypes'] = $model_doc_type->findAll();
+			// $_SESSION['doctypes'] = $model_doc_type->findAll();
 		}
 		else
 		{

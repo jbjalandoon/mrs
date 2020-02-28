@@ -100,7 +100,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
 
                 $data = [
                     [
-                        'id' => 1,
                         'name_on_class' => 'user_own_profile',
                         'function_name' => 'user\'s own profile',
                         'function_description' => 'user\'s own profile',
@@ -117,7 +116,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 2,
                         'function_name' => 'show user details',
                         'function_description' => 'show user details',
                         'slugs' => 'show-user',
@@ -134,7 +132,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 3,
                         'function_name' => 'create user account',
                         'function_description' => 'create user account',
                         'slugs' => 'add-user',
@@ -151,7 +148,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 4,
                         'function_name' => 'list of users',
                         'function_description' => 'users',
                         'slugs' => 'list-user',
@@ -168,7 +164,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 5,
                         'function_name' => 'edit user account',
                         'function_description' => 'edit user account',
                         'slugs' => 'edit-user',
@@ -185,7 +180,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 6,
                         'function_name' => 'delete user account',
                         'function_description' => 'delete user account',
                         'slugs' => 'delete-user',
@@ -202,7 +196,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 7,
                         'function_name' => 'show role details',
                         'function_description' => 'show role detials',
                         'slugs' => 'show-role-details',
@@ -219,7 +212,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 8,
                         'function_name' => 'create role',
                         'function_description' => 'create role',
                         'slugs' => 'add-role',
@@ -236,7 +228,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                      'id' => 9,
                         'function_name' => 'list of roles',
                         'function_description' => 'roles',
                         'slugs' => 'list-role',
@@ -253,7 +244,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 10,
                         'function_name' => 'edit role',
                         'function_description' => 'edit role',
                         'slugs' => 'edit-role',
@@ -270,7 +260,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 11,
                         'function_name' => 'delete role',
                         'function_description' => 'delete role',
                         'slugs' => 'delete-role',
@@ -287,7 +276,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 12,
                         'function_name' => 'roles permissions',
                         'function_description' => 'roles permissions',
                         'slugs' => 'role-permissions',
@@ -304,7 +292,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id' => 13,
                         'function_name' => 'edit roles permissions',
                         'function_description' => 'edit roles permissions',
                         'slugs' => 'edit-role-permissions',
