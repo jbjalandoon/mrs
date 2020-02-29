@@ -55,7 +55,6 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                 ]);
                 $this->forge->addKey('id', TRUE);
                 $this->forge->createTable($this->table);
-
                 $data = [
                     [
                         'module_name' => 'system settings',
@@ -74,18 +73,34 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'module_name' => 'documents',
-                        'module_description' => 'document management',
-                        'module_icon' => '<i class="fas fa-file-alt"></i>',
+                        'module_name' => 'patients',
+                        'module_description' => 'patients',
+                        'module_icon' => '<i class="fas fa-users-cog"></i>',
                         'order' => 3,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'module_name' => 'acceditation Management',
-                        'module_description' => 'all related to the accredition management',
-                        'module_icon' => '<i class="fas fa-diagnoses"></i>',
+                        'module_name' => 'visits',
+                        'module_description' => 'visit',
+                        'module_icon' => '<i class="fas fa-users-cog"></i>',
                         'order' => 4,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'module_name' => 'appointments',
+                        'module_description' => 'appointments',
+                        'module_icon' => '<i class="fas fa-users-cog"></i>',
+                        'order' => 5,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'module_name' => 'inventory',
+                        'module_description' => 'inventory',
+                        'module_icon' => '<i class="fas fa-users-cog"></i>',
+                        'order' => 6,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],

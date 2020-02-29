@@ -55,7 +55,7 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 			'App'         => APPPATH,                // To ensure filters, etc still found,
 			//'BaseControl' => APPPATH . 'Controllers',
 			'Modules\Node'  => ROOTPATH.'modules/Node',
-			// 'Modules\SystemSettings'  => ROOTPATH.'modules/SystemSettings',
+			'Modules\Appointments'  => ROOTPATH.'modules/Appointments',
 			'Modules\UserManagement'  => ROOTPATH.'modules/UserManagement'
 			// 'Modules\Documents'  => ROOTPATH.'modules/Documents',
 			// 'Modules\Accreditation'  => ROOTPATH.'modules/Accreditation'
