@@ -3,13 +3,13 @@ namespace Modules\Inventory\Models;
 
 use CodeIgniter\Model;
 
-class SuppliesModel extends \CodeIgniter\Model
+class SupplyTypesModel extends \CodeIgniter\Model
 {
-    protected $table = 'supplies';
+    protected $table = 'supply_types';
 
-    protected $allowedFields = ['role_name', 'function_id', 'description','status', 'created_at','updated_at', 'deleted_at'];
+    protected $allowedFields = ['type_name', 'description', 'status', 'created_at','updated_at', 'deleted_at'];
 
-    public function getSupplyWithCondition($conditions = [])
+    public function getSupplyTypeWithCondition($conditions = [])
 	{
 		foreach($conditions as $field => $value)
 		{
@@ -18,11 +18,11 @@ class SuppliesModel extends \CodeIgniter\Model
 	    return $this->findAll();
 	}
 
-	public function getSupplyWithFunction($args = [])
+	public function getSupplyTypeWithFunction($args = [])
 	{
 		$db = \Config\Database::connect();
 
-		$str = "SELECT a.*, b.function_name FROM roles a LEFT JOIN permissions b ON a.function_id = b.id WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
+		$str = "SELECT * FROM supply_types WHERE status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
 		// print_r($str); die();
 		$query = $db->query($str);
 
@@ -30,26 +30,26 @@ class SuppliesModel extends \CodeIgniter\Model
 	    return $query->getResultArray();
 	}
 
-    public function getSupplies()
+    public function getSupplyTypes()
 	{
 	    return $this->findAll();
 	}
 
-    public function addSupplies($val_array = [])
+    public function addSupplyTypes($val_array = [])
 	{
 		$val_array['created_at'] = (new \DateTime())->format('Y-m-d H:i:s');
 		$val_array['status'] = 'a';
 	    return $this->save($val_array);
 	}
 
-    public function editSupplies($val_array = [], $id)
+    public function editSupplyTypes($val_array = [], $id)
 	{
 		$val_array['updated_at'] = (new \DateTime())->format('Y-m-d H:i:s');
 		$val_array['status'] = 'a';
 		return $this->update($id, $val_array);
 	}
 
-    public function deleteSupplies($id)
+    public function deleteSupplyTypes($id)
 	{
 		$val_array['deleted_at'] = (new \DateTime())->format('Y-m-d H:i:s');
 		$val_array['status'] = 'd';

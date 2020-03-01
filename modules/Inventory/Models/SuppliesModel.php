@@ -7,7 +7,7 @@ class SuppliesModel extends \CodeIgniter\Model
 {
     protected $table = 'supplies';
 
-    protected $allowedFields = ['role_name', 'function_id', 'description','status', 'created_at','updated_at', 'deleted_at'];
+    protected $allowedFields = ['supply_type_id', 'name', 'description', 'quantity', 'unit','status', 'created_at','updated_at', 'deleted_at'];
 
     public function getSupplyWithCondition($conditions = [])
 	{
@@ -22,7 +22,7 @@ class SuppliesModel extends \CodeIgniter\Model
 	{
 		$db = \Config\Database::connect();
 
-		$str = "SELECT a.*, b.function_name FROM roles a LEFT JOIN permissions b ON a.function_id = b.id WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
+		$str = "SELECT a.*, b.type_name FROM supplies a LEFT JOIN supply_types b ON a.supply_type_id = b.id WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
 		// print_r($str); die();
 		$query = $db->query($str);
 

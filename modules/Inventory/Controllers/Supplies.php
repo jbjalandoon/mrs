@@ -2,7 +2,8 @@
 namespace Modules\Inventory\Controllers;
 
 use Modules\Inventory\Models\SuppliesModel;
-use Modules\Inventory\Models\PermissionsModel;
+use Modules\Inventory\Models\SupplyTypesModel;
+use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
 
 class Supplies extends BaseController
@@ -19,7 +20,7 @@ class Supplies extends BaseController
 
     public function index($offset = 0)
     {
-    	$this->hasPermissionRedirect('list-supplies');
+    	$this->hasPermissionRedirect('list-of-supplies');
 
     	$model = new SuppliesModel();
 
@@ -27,21 +28,26 @@ class Supplies extends BaseController
        	$data['all_items'] = $model->getSupplyWithCondition(['status'=> 'a']);
        	$data['offset'] = $offset;
 
-        $data['suplies'] = $model->getSupplyWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+        $data['supplies'] = $model->getSupplyWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
 
         $data['function_title'] = "List of Supplies";
         $data['viewName'] = 'Modules\Inventory\Views\supplies\index';
         echo view('App\Views\theme\index', $data);
     }
 
-    public function show_supply($id)
+    public function show_supplies($id)
 	{
 		$this->hasPermissionRedirect('show-supplies');
 		$data['permissions'] = $this->permissions;
 
-		$model = new SuppliesModel();
+		// $model = new SuppliesModel();
+		// $data['supplies'] = $model->get([],[],['supply_type_id'=>$id],[]);
 
-		$data['supply'] = $model->getSupplyWithCondition(['id' => $id]);
+		$model = new SuppliesModel();
+		$data['supplies'] = $model->getSupplyWithCondition(['id' => $id]);
+
+		$model = new SupplyTypesModel();
+		$data['supply_types'] = $model->getSupplyTypeWithCondition(['id' => $id]);
 
 		$data['function_title'] = "Supply Details";
         $data['viewName'] = 'Modules\Inventory\Views\supplies\suppliesDetails';
@@ -53,8 +59,10 @@ class Supplies extends BaseController
     	$this->hasPermissionRedirect('add-supplies');
 
     	$permissions_model = new PermissionsModel();
-
     	$data['permissions'] = $this->permissions;
+
+			$model_supply_types = new SupplyTypesModel();
+			$data['supply_types'] = $model_supply_types->where('status', 'a')->findAll();
 
     	helper(['form', 'url']);
     	$model = new SuppliesModel();
@@ -103,8 +111,10 @@ class Supplies extends BaseController
     	$data['rec'] = $model->find($id);
 
     	$permissions_model = new PermissionsModel();
-
     	$data['permissions'] = $this->permissions;
+
+			$model_supply_types = new SupplyTypesModel();
+			$data['supply_types'] = $model_supply_types->where('status', 'a')->findAll();
 
     	if(!empty($_POST))
     	{

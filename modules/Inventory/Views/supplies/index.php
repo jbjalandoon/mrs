@@ -13,23 +13,25 @@
     <thead class="thead-dark">
       <tr class="text-center">
         <th>#</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Landing Page</th>
+        <th>Supply Name</th>
+        <th>Supply Type</th>
+        <th>Quantity</th>
+        <th>Unit</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <?php $cnt = 1; ?>
-      <?php foreach($roles as $role): ?>
-      <tr id="<?php echo $role['id']; ?>">
+      <?php foreach($supplies as $supply): ?>
+      <tr id="<?php echo $supply['id']; ?>">
         <th scope="row"><?= $cnt++ ?></th>
-        <td><?= ucwords($role['role_name']) ?></td>
-        <td><?= ucwords($role['description']) ?></td>
-        <td><?= ucwords($role['function_name']) ?></td>
+        <td><?= ucwords($supply['name']) ?></td>
+        <td><?= ucwords($supply['type_name']) ?></td>
+        <td><?= ucwords($supply['quantity']) ?></td>
+        <td><?= ucwords($supply['unit']) ?></td>
         <td class="text-center">
           <?php
-            users_action('roles', $_SESSION['userPermmissions'], $role['id']);
+            users_action('supplies', $_SESSION['userPermmissions'], $supply['id']);
           ?>
         </td>
       </tr>
@@ -41,6 +43,6 @@
 
 <div class="row">
   <div class="col-md-6 offset-md-6">
-    <?php paginater('roles', count($all_items), PERPAGE, $offset) ?>
+    <?php paginater('supplies', count($all_items), PERPAGE, $offset) ?>
   </div>
 </div>

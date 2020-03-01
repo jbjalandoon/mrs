@@ -9,26 +9,53 @@
 <br>
 <div class="row">
   <div class="col-md-12">
-    <form action="<?= base_url() ?>roles/<?= isset($rec) ? 'edit/'.$rec['id'] : 'add' ?>" method="post">
+    <form action="<?= base_url() ?>supplies/<?= isset($rec) ? 'edit/'.$rec['id'] : 'add' ?>" method="post">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
-            <label for="role_name">Role name</label>
-            <input name="role_name" type="text" value="<?= isset($rec['role_name']) ? $rec['role_name'] : set_value('role_name') ?>" class="form-control <?= isset($errors['role_name']) ? 'is-invalid':'is-valid' ?>" id="role_name" placeholder="Role Name">
-              <?php if(isset($errors['role_name'])): ?>
+            <label for="name">Supply Name</label>
+            <input name="name" type="text" value="<?= isset($rec['name']) ? $rec['name'] : set_value('name') ?>" class="form-control <?= isset($errors['name']) ? 'is-invalid':'is-valid' ?>" id="name" placeholder="Supply Name">
+              <?php if(isset($errors['name'])): ?>
                 <div class="invalid-feedback">
-                  <?= $errors['role_name'] ?>
+                  <?= $errors['name'] ?>
                 </div>
               <?php endif; ?>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
-            <label for="description">Role Description</label>
-            <textarea name="description" type="text" class="form-control <?= isset($errors['description']) ? 'is-invalid':'is-valid'  ?>" id="description" placeholder="Role Description" rows="5"><?= isset($rec['description']) ? $rec['description'] : set_value('description') ?></textarea>
-            <?php if(isset($errors['description'])): ?>
+            <!-- <label for="function_id">Landing Page</label>
+            <input type="hidden" value="1" name="function_id"> -->
+            <label for="supply_type_id">Supply Type</label>
+            <select name="supply_type_id" class="form-control <?= isset($errors['supply_type_id']) ? 'is-invalid':'is-valid' ?>">
+              <?php if(isset($rec['supply_type_id'])): ?>
+                <option value="<?= $rec['supply_type_id'] ?>"><?= ucwords(name_on_system($rec['supply_type_id'], $supply_types, 'supply_types')) ?></option>
+              <?php else: ?>
+                <option value="">Supply Types</option>
+              <?php endif; ?>
+
+              <?php foreach($supply_types as $supply_type): ?>
+                <option value="<?= $supply_type['id'] ?>"><?= ucwords($supply_type['type_name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+             <?php if(isset($errors['supply_type_id'])): ?>
+                <div class="invalid-feedback">
+                  <?= $errors['supply_type_id'] ?>
+                </div>
+              <?php endif; ?>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="form-group">
+            <label for="description">Supply Description</label>
+            <textarea name="description" type="text" class="form-control <?= isset($errors['description']) ? 'is-invalid':'is-valid'  ?>" id="description" placeholder="Description" rows="5"><?= isset($rec['description']) ? $rec['description'] : set_value('description') ?></textarea>
+              <?php if(isset($errors['description'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['description'] ?>
                 </div>
@@ -36,31 +63,35 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
-            <!-- <label for="function_id">Landing Page</label>
-            <input type="hidden" value="1" name="function_id"> -->
-            <label for="function_id">Role's Landing Page</label>
-            <select name="function_id" class="form-control <?= isset($errors['function_id']) ? 'is-invalid':'is-valid' ?>">
-              <?php if(isset($rec['function_id'])): ?>
-                <option value="<?= $rec['function_id'] ?>"><?= ucwords(name_on_system($rec['function_id'], $permissions, 'permissions')) ?></option>
-              <?php else: ?>
-                <option value="">Select Landing Page</option>
-              <?php endif; ?>
-
-              <?php foreach($permissions as $permission): ?>
-                <option value="<?= $permission['id'] ?>"><?= ucwords($permission['function_name']) ?></option>
-              <?php endforeach; ?>
-            </select>
-             <?php if(isset($errors['function_id'])): ?>
+            <label for="quantity">Quantity</label>
+            <input name="quantity" type="number" value="<?= isset($rec['quantity']) ? $rec['quantity'] : set_value('quantity') ?>" class="form-control <?= isset($errors['quantity']) ? 'is-invalid':'is-valid' ?>" id="quantity" placeholder="Quantity">
+              <?php if(isset($errors['quantity'])): ?>
                 <div class="invalid-feedback">
-                  <?= $errors['function_id'] ?>
+                  <?= $errors['quantity'] ?>
                 </div>
               <?php endif; ?>
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="form-group">
+            <label for="unit">Unit</label>
+            <input name="unit" type="text" value="<?= isset($rec['unit']) ? $rec['unit'] : set_value('unit') ?>" class="form-control <?= isset($errors['unit']) ? 'is-invalid':'is-valid' ?>" id="unit" placeholder="Unit">
+              <?php if(isset($errors['unit'])): ?>
+                <div class="invalid-feedback">
+                  <?= $errors['unit'] ?>
+                </div>
+              <?php endif; ?>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <button type="submit" class="btn btn-primary float-right">Submit</button>

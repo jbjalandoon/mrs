@@ -1,11 +1,11 @@
 <?php
 namespace Modules\Inventory\Controllers;
 
-use Modules\Inventory\Models\SuppliesModel;
-use Modules\Inventory\Models\PermissionsModel;
+use Modules\Inventory\Models\SupplyTypesModel;
+use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
 
-class Supplies extends BaseController
+class SupplyTypes extends BaseController
 {
 	//private $permissions;
 
@@ -19,87 +19,87 @@ class Supplies extends BaseController
 
     public function index($offset = 0)
     {
-    	$this->hasPermissionRedirect('list-supplies');
+    	$this->hasPermissionRedirect('list-of-supply-types');
 
-    	$model = new SuppliesModel();
+    	$model = new SupplyTypesModel();
 
     	//kailangan ito para sa pagination
-       	$data['all_items'] = $model->getSupplyWithCondition(['status'=> 'a']);
+       	$data['all_items'] = $model->getSupplyTypeWithCondition(['status'=> 'a']);
        	$data['offset'] = $offset;
 
-        $data['suplies'] = $model->getSupplyWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+        $data['supply_types'] = $model->getSupplyTypeWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
 
-        $data['function_title'] = "List of Supplies";
-        $data['viewName'] = 'Modules\Inventory\Views\supplies\index';
+        $data['function_title'] = "List of Supply Types";
+        $data['viewName'] = 'Modules\Inventory\Views\supplytypes\index';
         echo view('App\Views\theme\index', $data);
     }
 
-    public function show_supply($id)
+    public function show_supply_types($id)
 	{
-		$this->hasPermissionRedirect('show-supplies');
+		$this->hasPermissionRedirect('show-supply-types');
 		$data['permissions'] = $this->permissions;
 
-		$model = new SuppliesModel();
+		$model = new SupplyTypesModel();
 
-		$data['supply'] = $model->getSupplyWithCondition(['id' => $id]);
+		$data['supply_types'] = $model->getSupplyTypeWithCondition(['id' => $id]);
 
-		$data['function_title'] = "Supply Details";
-        $data['viewName'] = 'Modules\Inventory\Views\supplies\suppliesDetails';
-        echo view('App\Views\theme\index', $data);
+		$data['function_title'] = "Supply Type Details";
+    $data['viewName'] = 'Modules\Inventory\Views\supplytypes\supplytypesDetails';
+    echo view('App\Views\theme\index', $data);
 	}
 
-    public function add_supplies()
+    public function add_supply_types()
     {
-    	$this->hasPermissionRedirect('add-supplies');
+    	$this->hasPermissionRedirect('add-supply-types');
 
     	$permissions_model = new PermissionsModel();
 
     	$data['permissions'] = $this->permissions;
 
     	helper(['form', 'url']);
-    	$model = new SuppliesModel();
+    	$model = new SupplyTypesModel();
 
     	if(!empty($_POST))
     	{
-	    	if (!$this->validate('supply'))
+	    	if (!$this->validate('supply_type'))
 		    {
-		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Add Supplies";
-		        $data['viewName'] = 'Modules\Inventory\Views\supplies\frmSupplies';
+		    		$data['errors'] = \Config\Services::validation()->getErrors();
+		        $data['function_title'] = "Add Supply Types";
+		        $data['viewName'] = 'Modules\Inventory\Views\supplytypes\frmSupplyTypes';
 		        echo view('App\Views\theme\index', $data);
 		    }
 		    else
 		    {
-		        if($model->addSupplies($_POST))
+		        if($model->addSupplyTypes($_POST))
 		        {
 		        	// $role_id = $model->insertID();
 		        	// $permissions_model->update_permitted_role($role_id, $_POST['function_id']);
 		        	$_SESSION['success'] = 'You have added a new record';
-					$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('supplies'));
+							$this->session->markAsFlashdata('success');
+		        	return redirect()->to(base_url('supply-types'));
 		        }
 		        else
 		        {
 		        	$_SESSION['error'] = 'You have an error in adding a new record';
 					$this->session->markAsFlashdata('error');
-		        	return redirect()->to(base_url('supplies'));
+		        	return redirect()->to(base_url('supply-types'));
 		        }
 		    }
     	}
     	else
     	{
 
-	    	$data['function_title'] = "Add Supplies";
-	        $data['viewName'] = 'Modules\Inventory\Views\supplies\frmSupplies';
+	    	$data['function_title'] = "Add Supply Types";
+	        $data['viewName'] = 'Modules\Inventory\Views\supplytypes\frmSupplyTypes';
 	        echo view('App\Views\theme\index', $data);
     	}
     }
 
-    public function edit_supplies($id)
+    public function edit_supply_types($id)
     {
-    	$this->hasPermissionRedirect('edit-supplies');
+    	$this->hasPermissionRedirect('edit-supply-types');
     	helper(['form', 'url']);
-    	$model = new SuppliesModel();
+    	$model = new SupplyTypesModel();
     	$data['rec'] = $model->find($id);
 
     	$permissions_model = new PermissionsModel();
@@ -108,44 +108,44 @@ class Supplies extends BaseController
 
     	if(!empty($_POST))
     	{
-	    	if (!$this->validate('supply'))
+	    	if (!$this->validate('supply_type'))
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Edit Supplies";
-		        $data['viewName'] = 'Modules\Inventory\Views\supplies\frmSupplies';
+		        $data['function_title'] = "Edit Supply Type";
+		        $data['viewName'] = 'Modules\Inventory\Views\supplytypes\frmSupplyTypes';
 		        echo view('App\Views\theme\index', $data);
 		    }
 		    else
 		    {
-		    	if($model->editSupplies($_POST, $id))
+		    	if($model->editSupplyTypes($_POST, $id))
 		        {
 		        	// $permissions_model->update_permitted_role($id, $_POST['function_id'], $data['rec']['function_id']);
 		        	$_SESSION['success'] = 'You have updated a record';
 							$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('supplies'));
+		        	return redirect()->to(base_url('supply-types'));
 		        }
 		        else
 		        {
-		        	$_SESSION['error'] = 'You an errors in updating a record';
+		        	$_SESSION['error'] = 'You errors in updating a record';
 					$this->session->markAsFlashdata('error');
-		        	return redirect()->to( base_url('supplies'));
+		        	return redirect()->to( base_url('supply-types'));
 		        }
 		    }
     	}
     	else
     	{
-	    	$data['function_title'] = "Edit Supplies";
-	        $data['viewName'] = 'Modules\Inventory\Views\supplies\frmSupplies';
+	    	$data['function_title'] = "Edit Supply Types";
+	        $data['viewName'] = 'Modules\Inventory\Views\supplytypes\frmSupplyTypes';
 	        echo view('App\Views\theme\index', $data);
     	}
     }
 
-    public function delete_supplies($id)
+    public function delete_supply_types($id)
     {
-    	$this->hasPermissionRedirect('delete-supplies');
+    	$this->hasPermissionRedirect('delete-supply-types');
 
-    	$model = new SuppliesModel();
-    	$model->deleteSupplies($id);
+    	$model = new SupplyTypesModel();
+    	$model->deleteSupplyTypes($id);
     }
 
 }
