@@ -7,7 +7,7 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
         {
                 $this->forge->addField([
                         'id'          => [
-                                'type'           => 'BIGINT',
+                                  'type'           => 'BIGINT',
                                 'unsigned'       => TRUE,
                                 'auto_increment' => TRUE
                         ],

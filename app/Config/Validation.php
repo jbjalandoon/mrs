@@ -386,6 +386,99 @@ class Validation
 
 		];
 
+		public $patient = [
+						'last_name' => [
+								'label'  => 'Last Name',
+								'rules'  => 'required|alpha',
+								'errors' => [
+										'required' => 'Last Name field is required.',
+										'alpha' => 'Last Name must not have numbers.'
+								]
+						],
+
+						'first_name' => [
+								'label'  => 'First Name',
+								'rules'  => 'required|alpha',
+								'errors' => [
+										'required' => 'First Name field is required.',
+										'alpha' => 'First Name must not have numbers.'
+								]
+						],
+
+						'birthdate' => [
+								'label'  => 'Birth Date',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Birth Date field is required.'
+								]
+						],
+
+						'gender' => [
+								'label'  => 'Gender',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Gender field is required.'
+								]
+						],
+
+						'cellphone_no' => [
+								'label'  => 'Contact No.',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Contact No. field is required.'
+								]
+						],
+
+						'address' => [
+								'label'  => 'Address',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Address field is required.'
+								]
+						],
+
+						'city' => [
+								'label'  => 'City',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'City field is required.'
+								]
+						],
+
+						'province' => [
+								'label'  => 'Province',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Province field is required.'
+								]
+						],
+
+						'postal' => [
+								'label'  => 'Postal',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Postal field is required.'
+								]
+						],
+
+						'relative_name' => [
+								'label'  => 'Relative Name',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Relative Name field is required.'
+								]
+						],
+
+						'relative_contact' => [
+								'label'  => 'Relative Contact',
+								'rules'  => 'required',
+								'errors' => [
+										'required' => 'Relative Contact field is required.'
+								]
+						],
+
+       ];
+
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
