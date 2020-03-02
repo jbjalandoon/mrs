@@ -56,6 +56,7 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 			//'BaseControl' => APPPATH . 'Controllers',
 			'Modules\Node'  => ROOTPATH.'modules/Node',
 			'Modules\SystemSetting'  => ROOTPATH.'modules/SystemSetting',
+			'Modules\Appointments'  => ROOTPATH.'modules/Appointments',
 			'Modules\UserManagement'  => ROOTPATH.'modules/UserManagement'
 		];
 
