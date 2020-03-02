@@ -77,6 +77,6 @@ defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-defined('SYSTEM_NAME') || define('SYSTEM_NAME', 'Accreditation Documents Management System');
-defined('SYSTEM_TITLE') || define('SYSTEM_TITLE', 'DAMAS');
+defined('SYSTEM_NAME') || define('SYSTEM_NAME', 'Medical Record System');
+defined('SYSTEM_TITLE') || define('SYSTEM_TITLE', 'MRS');
 defined('PERPAGE') || define('PERPAGE', 10);
