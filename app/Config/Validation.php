@@ -386,6 +386,70 @@ class Validation
 
 		];
 
+		public $supply = [
+				'supply_type_id' => [
+						'label'  => 'Supply Type',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'This is required.'
+						]
+				],
+
+				'name' => [
+						'label'  => 'Name',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Name field is required.'
+						]
+				],
+
+				'description' => [
+						'label'  => 'Supplies Description',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Supply description field is required.'
+						]
+				],
+
+				'quantity' => [
+						'label'  => 'Quantity',
+						'rules'  => 'required|numeric',
+						'errors' => [
+								'required' => 'Quantity field is required.',
+								'numeric' => 'Input a number.'
+						]
+				],
+
+				'unit' => [
+						'label'  => 'Unit',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Unit field is required.',
+
+						]
+				]
+
+		];
+
+		public $supply_type = [
+				'type_name' => [
+						'label'  => 'Supply Type',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'This is required.'
+						]
+				],
+
+				'description' => [
+						'label'  => 'Supplies Description',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Supply description field is required.'
+						]
+				]
+
+		];
+
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------

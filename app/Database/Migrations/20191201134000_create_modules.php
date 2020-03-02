@@ -99,7 +99,11 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                     [
                         'module_name' => 'inventory',
                         'module_description' => 'inventory',
+<<<<<<< HEAD
                         'module_icon' => '<i class="fas fa-users-cog"></i>',
+=======
+                        'module_icon' => '<i class="fas fa-boxes"></i>',
+>>>>>>> 33d2a469b853b3920ff512218f74179ef5eef9f1
                         'order' => 6,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
