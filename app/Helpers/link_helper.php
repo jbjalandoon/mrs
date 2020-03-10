@@ -23,19 +23,27 @@ if (! function_exists('user_primary_links'))
 		{
 			if(hasPrimary($module['id'], $array_permissions))
 			{
-				echo '<li class="nav-item active">';
-				echo '<div class="dropdown primary-menu-top">';
-				echo '<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="'.str_replace(' ', '', ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'))).'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+				echo '<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts'. $module['id'].  '" aria-expanded="false" aria-controls="collapseLayouts">';
+				// echo 'Layouts';
 				echo getIcon($module['id'], $_SESSION['appmodules'], false).' '. ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
-				echo '</button>';
-				echo '<div class="dropdown-menu drop-items-primary" aria-labelledby="'.str_replace(' ', '', ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'))).'">';
+				echo '<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i>';
+				echo '</div>';
+ 				echo '</a>';
 				foreach($array_permissions as $permission)
 				{
 					if($permission['status'] == 'a' && $permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
 					{
 						if($permission['slugs'] == 'user-own-profile')
+						// .getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .
 						{
-							echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'/own/'.$_SESSION['uid'] .'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
+							echo '<div class="collapse" id="collapseLayouts'.$module['id'].'" aria-labelledby="headingOne" data-parent="#sidenavAccordion">';
+							echo '<nav class="sb-sidenav-menu-nested nav">';
+							echo '<a class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'/own/'.$_SESSION['uid'] .'">';
+							echo getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']);
+							echo '</a>';
+							echo '</nav>';
+							echo '</div>';
+							// echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'/own/'.$_SESSION['uid'] .'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
 						}
 						else
 						{
@@ -43,15 +51,21 @@ if (! function_exists('user_primary_links'))
 							{
 								$strAdditionalUrl = '/upload-academic-document';
 							}
-
-							echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).''.$strAdditionalUrl.'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
-							$strAdditionalUrl = '';
+							echo '<div class="collapse" id="collapseLayouts'.$module['id'].'" aria-labelledby="headingOne" data-parent="#sidenavAccordion">';
+							echo '<nav class="sb-sidenav-menu-nested nav">';
+							echo '<a class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'">';
+							echo getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']);
+							echo '</a>';
+							echo '</nav>';
+							echo '</div>';
+							// echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).''.$strAdditionalUrl.'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
+							// $strAdditionalUrl = '';
 						}
 					}
 				}
-				echo '</div>';
-				echo '</div>';
-				echo '</li>';
+				// echo '</div>';
+				// echo '</div>';
+				// echo '</li>';
 			}
 		}
 	}
