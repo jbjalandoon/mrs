@@ -49,10 +49,30 @@ class CreateDiagnosisType extends \CodeIgniter\Database\Migration {
       $this->forge->addKey('id', TRUE);
       $this->forge->createTable($this->table);
 
+      $data = [
+        [
+          'name' => 'primary',
+          'description' => 'primary diagnosis',
+          'created_at' => date('Y-m-d H:i:s')
+        ],
+        [
+          'name' => 'secondary',
+          'description' => 'secondary diagnosis',
+          'created_at' => date('Y-m-d H:i:s')
+        ]
+      ];
+
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $builder->insertBatch($data);
+
     }
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

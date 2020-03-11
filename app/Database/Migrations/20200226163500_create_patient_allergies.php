@@ -21,16 +21,12 @@ class CreatePatientAllergies extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'description' => [
-          'type' => 'text',
-          'comment' => ''
-        ],
-        'date_discovered' => [
-          'type' => 'datetime',
+        'reaction_id' => [
+          'type' => 'JSON',
           'comment' => ''
         ],
         'severity' => [
-          'type' => 'text',
+          'type' => 'INT',
           'comment' => ''
         ],
         'status' => [
@@ -63,6 +59,9 @@ class CreatePatientAllergies extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

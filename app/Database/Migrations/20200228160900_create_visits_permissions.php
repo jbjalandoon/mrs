@@ -1,6 +1,6 @@
 <?php namespace App\Database\Migrations;
 
-class CreateVisits extends \CodeIgniter\Database\Migration {
+class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
 
     private $table = 'permissions';
     public function up()
@@ -25,17 +25,17 @@ class CreateVisits extends \CodeIgniter\Database\Migration {
           ],
 
           [
-            'function_name' => 'create visits',
-            'function_description' => 'create visits',
-            'slugs' => 'add-visits',
-            'name_on_class' => 'add_visits',
-            'page_title' => 'create a visits',
+            'function_name' => 'start visits',
+            'function_description' => 'start visits',
+            'slugs' => 'start-visits',
+            'name_on_class' => 'start_visits',
+            'page_title' => 'start a visits',
             'module_id' => '4',
             'link_icon' => '',
             'order' => '2',
             'table_name' => 'visits',
             'func_action' => 'add',
-            'func_type' => 3,
+            'func_type' => 2,
             'allowed_roles' => "[1]",
             'status' => 'a',
             'created_at' => date('Y-m-d H:i:s')

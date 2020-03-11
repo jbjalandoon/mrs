@@ -8,14 +8,14 @@ use Modules\UserManagement\Models\RolesModel;
 use App\Controllers\BaseController;
 
 class Permissions extends BaseController
-{ 
+{
 	public function __construct()
 	{
 		parent:: __construct();
 	}
 
     public function index($indexPage = 1)
-    {	
+    {
     	$this->hasPermissionRedirect('role-permissions');
 
     	$model = new PermissionsModel();
@@ -51,7 +51,7 @@ class Permissions extends BaseController
     			}
     			$str = rtrim($str, ',');
     			$str .= ']';
-    			
+
     			$dataVal = 	['allowed_roles' => $str];
     			if($model->editPermission($dataVal, $permissionID))
 				{
@@ -59,7 +59,7 @@ class Permissions extends BaseController
 				}
 
     		}
-     		
+
      		if($isUpdated == 1)
 	         {
 	         	$_SESSION['success'] = 'You have updated the permissions';

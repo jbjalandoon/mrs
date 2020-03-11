@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Modules\UserManagement\Models;
 
 use CodeIgniter\Model;
@@ -25,7 +25,7 @@ class UsersModel extends \CodeIgniter\Model
 		$str = "SELECT a.*, b.role_name FROM users a LEFT JOIN roles b ON a.role_id = b.id WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
 		//print_r($str); die();
 		$query = $db->query($str);
-		
+
 		// print_r($query->getResultArray()); die();
 	    return $query->getResultArray();
 	}
@@ -48,7 +48,7 @@ class UsersModel extends \CodeIgniter\Model
     public function editUsers($val_array = [], $id)
 	{
 		$user = $this->find($id);
-		
+
 		$val_array['updated_at'] = (new \DateTime())->format('Y-m-d H:i:s');
 		$val_array['status'] = 'a';
 		//print_r($val_array); die();

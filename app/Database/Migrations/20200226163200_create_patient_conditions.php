@@ -21,15 +21,7 @@ class CreatePatientConditions extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'visits_id' => [
-          'type' => 'BIGINT',
-          'comment' => ''
-        ],
-        'date_discovered' => [
-          'type' => 'datetime',
-          'comment' => ''
-        ],
-        'patient_Condition_status' => [
+        'patient_condition_status' => [
           'type' => 'tinyint',
           'comment' => ''
         ],
@@ -63,6 +55,9 @@ class CreatePatientConditions extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

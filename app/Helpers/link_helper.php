@@ -95,6 +95,29 @@ if (! function_exists('user_add_link'))
 	}
 }
 
+if (! function_exists('patient_detail_add_link'))
+{
+	function patient_detail_add_link(string $table, array $array_permissions, int $id)
+	{
+		foreach($array_permissions as $permission)
+		{
+			if($permission['table_name'] == $table && $permission['func_type'] == 3 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
+			{
+				switch($table)
+				{
+					case 'parameter_items':
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmParameterItems"><i class="fas fa-plus"></i> Add Parameter Items</button>';
+						break;
+					default:
+						echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add/'.$id.'" class="btn btn-sm btn-primary btn-block float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';
+						break;
+				}
+				break;
+			}
+		}
+	}
+}
+
 if (! function_exists('file_upload_link'))
 {
 	function file_upload_link($slugs, array $array_permissions, $name, $class, $hasStyle = 1)
@@ -136,9 +159,25 @@ if (! function_exists('user_edit_link'))
 	}
 }
 
+if (! function_exists('patient_detail_link'))
+{
+	function patient_detail_link(string $table, string $slugs, array $array_permissions, $id)
+	{
+		foreach($array_permissions as $permission)
+		{
+			if($permission['slugs'] == $slugs && $permission['func_type'] == 3 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
+			{
+				echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/show/'.$id.'" class="btn btn-sm btn-warning"><i class="fas fa-bars"></i> Show Detail</a>';
+				break;
+			}
+		}
+
+	}
+}
+
 if (! function_exists('users_action'))
 {
-	function users_action(string $table, array $array_permissions, $id)
+	function users_action(string $table, array $array_permissions, $id, $pId = 0)
 	{
 
 		foreach($array_permissions as $permission)
@@ -151,10 +190,25 @@ if (! function_exists('users_action'))
 						echo '<a class="btn btn-info btn-sm" title="show" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="fas fa-bars"></i></a> ';
 						break;
 					case 'edit':
-						echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
+						switch($table){
+							case 'patient_conditions':
+								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
+							break;
+							default:
+								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
+							break;
+						}
 						break;
 					case 'delete':
-						echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/\','.$id.')" title="delete"><i class="far fa-trash-alt"></i></a>';
+						switch($table){
+							case 'patient_conditions':
+								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+								// echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete\'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+							break;
+							default:
+								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+							break;
+						}
 						break;
 				}
 			}

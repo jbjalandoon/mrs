@@ -87,39 +87,6 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
-                    [
-                        'lastname' => 'Area',
-                        'firstname' => 'Area',
-                        'username' => 'area',
-                        'email' => 'area@admin.com',
-                        'password' => password_hash('area', PASSWORD_DEFAULT),
-                        'birthdate' => date('Y-m-d'),
-                        'role_id' => 3,
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'lastname' => 'Department',
-                        'firstname' => 'Department',
-                        'username' => 'department',
-                        'email' => 'department@admin.com',
-                        'password' => password_hash('department', PASSWORD_DEFAULT),
-                        'birthdate' => date('Y-m-d'),
-                        'role_id' => 4,
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'lastname' => 'Academic',
-                        'firstname' => 'Academic',
-                        'username' => 'academic',
-                        'email' => 'academic@admin.com',
-                        'password' => password_hash('academic', PASSWORD_DEFAULT),
-                        'birthdate' => date('Y-m-d'),
-                        'role_id' => 5,
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
                 ];
 
                 $db      = \Config\Database::connect();
@@ -129,6 +96,9 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
 
         public function down()
         {
-                $this->forge->dropTable('users');
+          $db      = \Config\Database::connect();
+          $builder = $db->table($this->table);
+          $db->simpleQuery('DELETE FROM '.$this->table);
+          $this->forge->dropTable($this->table);
         }
 }

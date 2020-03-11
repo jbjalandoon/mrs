@@ -1,6 +1,6 @@
 <?php namespace App\Database\Migrations;
 
-class CreateVitals extends \CodeIgniter\Database\Migration {
+class CreateVitalsPermissions extends \CodeIgniter\Database\Migration {
 
     private $table = 'permissions';
     public function up()

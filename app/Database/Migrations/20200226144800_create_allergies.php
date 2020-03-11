@@ -13,8 +13,16 @@ class CreateAllergies extends \CodeIgniter\Database\Migration {
           'unsigned'  => TRUE,
           'auto_increment' => TRUE
         ],
-        'allergy_name' => [
+        'name' => [
           'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'description' => [
+          'type' => 'TEXT',
+          'constraint' => '255'
+        ],
+        'allergy_type' => [
+          'type' => 'TEXT',
           'constraint' => '255'
         ],
         'status' => [
@@ -47,6 +55,9 @@ class CreateAllergies extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

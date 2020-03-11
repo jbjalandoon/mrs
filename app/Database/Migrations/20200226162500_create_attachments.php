@@ -55,6 +55,9 @@ class CreateAttachments extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

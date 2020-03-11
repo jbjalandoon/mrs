@@ -9844,3 +9844,44 @@ span.field-value
 	margin-bottom: 2px;
 	color: #343a40;
 }
+
+#header
+{
+  background: #122230;
+}
+
+#side
+{
+  background: #0E365B;
+}
+
+#dropdown a
+{
+  /* color: black !important; */
+}
+
+.collapse li a:hover
+{
+	/* color: yellow; */
+}
+
+nav img
+{
+	width: 375px;
+	margin-left: -15px;
+}
+
+#cardholder
+{
+  border: 1px solid #BEBEBE;
+  border-radius: 10px;
+}
+
+#cardholder:hover
+{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.table-border-top {
+  border-top: 5px solid black;
+}

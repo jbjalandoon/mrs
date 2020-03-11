@@ -13,7 +13,7 @@ class CreateConditions extends \CodeIgniter\Database\Migration {
           'unsigned'  => TRUE,
           'auto_increment' => TRUE
         ],
-        'condition_name' => [
+        'name' => [
           'type' => 'text',
           'comment' => ''
         ],
@@ -51,6 +51,9 @@ class CreateConditions extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }

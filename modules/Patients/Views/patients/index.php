@@ -50,9 +50,3 @@
   </table>
  </div>
 <hr>
-
-<div class="row">
-  <div class="col-md-6 offset-md-6">
-    <?php paginater('patients', count($all_items), PERPAGE, $offset) ?>
-  </div>
-</div>

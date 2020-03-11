@@ -23,7 +23,7 @@ function alert_login_success(message){
 	);
 }
 
-function confirmDelete(url, id)
+function confirmDelete(url)
 {
 	Swal.fire({
 		  title: 'Are you sure?',
@@ -38,32 +38,7 @@ function confirmDelete(url, id)
           closeOnCancel: false
 		}).then((result) => {
 		  if (result.value) {
-		  	$.ajax({
-	             url: url + id,
-	             type: 'DELETE',
-	             error: function() {
-								 console.log(url);
-	               Swal.fire({
-									  icon: 'error',
-									  title: 'Oops...',
-									  text: 'Something went wrong!',
-									  footer: '<a href>Why do I have this issue?</a>'
-									});
-	             },
-	             success: function(data) {
-	             	   Swal.fire(
-						  'Deleted!',
-					      'Your file has been deleted.',
-					      'success'
-						).then((resultAgain)=>{
-							if (resultAgain.value)
-							{
-	                  			$("#"+id).remove();
-	                  			location.reload(fast);
-							}
-						});
-	             }
-	          });
+				window.location.replace(url);
 		  }
 	})
 }

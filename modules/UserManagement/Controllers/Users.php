@@ -3,10 +3,10 @@ namespace Modules\UserManagement\Controllers;
 
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models\RolesModel;
-use Modules\UserManagement\Models\UserDetailsModel;
-use Modules\SystemSettings\Models\AreasModel;
-use Modules\SystemSettings\Models\DepartmentsModel;
-use Modules\SystemSettings\Models\ProgramsModel;
+// use Modules\UserManagement\Models\UserDetailsModel;
+// use Modules\SystemSettings\Models\AreasModel;
+// use Modules\SystemSettings\Models\DepartmentsModel;
+// use Modules\SystemSettings\Models\ProgramsModel;
 use App\Controllers\BaseController;
 
 class Users extends BaseController
@@ -28,17 +28,17 @@ class Users extends BaseController
 		$data['permissions'] = $this->permissions;
 
 		$model = new UsersModel();
-		$model_areas = new AreasModel();
-		$model_departments = new DepartmentsModel();
-		$model_user_details = new UserDetailsModel();
-		$model_ac_details = new ProgramsModel();
+		// $model_areas = new AreasModel();
+		// $model_departments = new DepartmentsModel();
+		// $model_user_details = new UserDetailsModel();
+		// $model_ac_details = new ProgramsModel();
 
-		$data['areas'] = $model_areas->where('status', 'a')->findAll();
-		$data['academic_programs'] = $model_ac_details->where('status', 'a')->findAll();
-		$data['departments'] = $model_departments->where('status', 'a')->findAll();
+		// $data['areas'] = $model_areas->where('status', 'a')->findAll();
+		// $data['academic_programs'] = $model_ac_details->where('status', 'a')->findAll();
+		// $data['departments'] = $model_departments->where('status', 'a')->findAll();
 
 		$data['user'] = $model->getUserWithCondition(['id' => $id]);
-		$data['user_detail'] = $model_user_details->getCredential($id);
+		// $data['user_detail'] = $model_user_details->getCredential($id);
 
 		// print_r($data['user_detail']); die("here");
 
@@ -51,14 +51,14 @@ class Users extends BaseController
 	{
 			$data = array(
 						 'user_id'  => $_POST['user_id'],
-						 'area_id'  => $_POST['area_id'],
-						 'department_id' => $_POST['department_id'],
-						 'academic_program_id' => $_POST['academic_program_id'],
+						 // 'area_id'  => $_POST['area_id'],
+						 // 'department_id' => $_POST['department_id'],
+						 // 'academic_program_id' => $_POST['academic_program_id'],
 						 'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
 				 );
 
-			$model_user_details = new UserDetailsModel();
-			$jdata = $model_user_details->addUserDetail($data);
+			// $model_user_details = new UserDetailsModel();
+			// $jdata = $model_user_details->addUserDetail($data);
 			echo json_encode($jdata);
 	}
 
@@ -66,15 +66,15 @@ class Users extends BaseController
 	{
 			$data = array(
 						 'user_id'  => $_POST['user_id'],
-						 'area_id'  => $_POST['area_id'],
-						 'department_id' => $_POST['department_id'],
-						 'academic_program_id' => $_POST['academic_program_id'],
+						 // 'area_id'  => $_POST['area_id'],
+						 // 'department_id' => $_POST['department_id'],
+						 // 'academic_program_id' => $_POST['academic_program_id'],
 						 'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
 				 );
 
 			// return json_encode($id);
-			$model_user_details = new UserDetailsModel();
-			$jdata = $model_user_details->editUserDetail($data, $id);
+			// $model_user_details = new UserDetailsModel();
+			// $jdata = $model_user_details->editUserDetail($data, $id);
 			echo json_encode($jdata);
 	}
 

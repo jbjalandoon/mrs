@@ -29,57 +29,15 @@ class Validation
 		'list'   => 'CodeIgniter\Validation\Views\list',
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
-
-	public $accreditation_templates = [
-        'template_code' => [
-            'label'  => 'Template Code',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Template Code field is required.'
-            ]
-        ],
-
-        'template_name' => [
-            'label'  => 'Template Name',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Template Name field is required.'
-            ]
-        ],
-
-				'description' => [
-					'label'  => 'Node Description',
-					'rules'  => 'required',
-					'errors' => [
-						'required' => 'Node desciption field is required.'
-					]
-				],
-
-        'accreditation_level_id' => [
-            'label'  => 'Acceditation Level',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Acceditation Level field is required.'
-            ]
-        ],
-
-        'academic_program_id' => [
-            'label'  => 'Academic Program',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Academic Program field is required.'
-            ]
-        ],
-
-        'area_id' => [
-            'label'  => 'Area',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Area field is required.'
-            ]
-        ],
-    ];
-
+		public $patientCondition = [
+			'condition_id' => [
+				'label' => 'Condition',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Condition field is required'
+				]
+			]
+		];
     public $role = [
         'role_name' => [
             'label'  => 'Role Name',
@@ -104,135 +62,6 @@ class Validation
                 'required' => 'Landing Page field is required.'
             ]
         ],
-    ];
-
-    public $area = [
-        'area_code' => [
-            'label'  => 'Area Code',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Area Code field is required.'
-            ]
-        ],
-
-        'area_name' => [
-            'label'  => 'Area Name',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Area Name field is required.'
-            ]
-        ],
-
-        'description' => [
-            'label'  => 'Area Description',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Area desciption field is required.'
-            ]
-        ],
-
-        'area_head_id' => [
-            'label'  => 'Area Head',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Area Head field is required.'
-            ]
-        ],
-
-    ];
-
-    public $document_type = [
-        'document_type_code' => [
-            'label'  => 'Document Type Code',
-            'rules'  => 'required|alpha_numeric_space',
-            'errors' => [
-                'required' => 'Document Type Code field is required.'
-            ]
-        ],
-
-        'document_type_name' => [
-            'label'  => 'Document Type Name',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Document Type Name field is required.'
-            ]
-        ],
-
-        'description' => [
-            'label'  => 'Document Type Description',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Document Type desciption field is required.'
-            ]
-        ],
-    ];
-
-    public $academic_program = [
-        'program_name' => [
-            'label'  => 'Program Name',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Program Name field is required.'
-            ]
-        ],
-
-        'description' => [
-            'label'  => 'Academic Program Description',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Academic Program desciption field is required.'
-            ]
-        ],
-
-				'program_head_id' => [
-						'label'  => 'Program Head',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Program Head field is required.'
-						]
-				],
-    ];
-
-    public $addParameterItem = [
-        'parameter_item' => [
-            'label'  => 'Program Item',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'Parameter field is required.'
-            ]
-        ],
-
-        'description' => [
-            'label'  => 'Parameter Item Details / Description',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'parameter item details / desciption field is required.'
-            ]
-        ],
-
-        'document_needed_list' => [
-            'label'  => 'Needed Documents',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'needed document field is required.'
-            ]
-        ],
-
-				'parameter_section_id' => [
-						'label'  => 'Parameter Section',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Parameter Section field is required.'
-						]
-				],
-
-				'template_parameter_id' => [
-						'label'  => 'Parameter Name',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Parameter Name field is required.'
-						]
-				],
     ];
 
 	public $user = [
@@ -359,33 +188,6 @@ class Validation
 
     ];
 
-		public $department = [
-				'department_name' => [
-						'label'  => 'Department Name',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Department Name field is required.'
-						]
-				],
-
-				'description' => [
-						'label'  => 'Department Description',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Department desciption field is required.'
-						]
-				],
-
-				'dept_head_id' => [
-						'label'  => 'Department Head',
-						'rules'  => 'required',
-						'errors' => [
-								'required' => 'Department Head field is required.'
-						]
-				],
-
-		];
-
 		public $supply = [
 				'supply_type_id' => [
 						'label'  => 'Supply Type',
@@ -448,6 +250,78 @@ class Validation
 						]
 				]
 
+		];
+		public $vitals = [
+				'weight' => [
+						'label'  => 'Height',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Weight Field is required.'
+						]
+				],
+				'height' => [
+						'label'  => 'Height',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Height field is required.'
+						]
+				],
+				'temperature' => [
+						'label'  => 'Temperature',
+						'rules'  => 'required|greater_than[20]',
+						'errors' => [
+								'required' => 'Temperature field is required.',
+								'greater_than' => 'Temperature must be greater than 20'
+						]
+				],
+				'respiratory_rate' => [
+						'label'  => 'Respiratory Rate',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Supply description field is required.'
+						]
+				],
+				'pulse_rate' => [
+						'label'  => 'Pulse Rate',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Pulse Rate field is required.'
+						]
+				],
+				'blood_pressure_numerator' => [
+						'label'  => 'Supplies Description',
+						'rules'  => 'required|greater_than[0]',
+						'errors' => [
+								'required' => 'Supply description field is required.',
+								'greater_than' => 'Blood Pressure Must not be Zero.'
+						]
+				],
+				'blood_pressure_denominator' => [
+						'label'  => 'Supplies Description',
+						'rules'  => 'required|greater_than[0]',
+						'errors' => [
+								'required' => 'Supply description field is required.',
+								'greater_than' => 'Blood Pressure Must not be Zero.'
+						]
+				],
+		];
+		public $condition = [
+					 'name' => [
+							 'label'  => 'Condition Name',
+							 'rules'  => 'required',
+							 'errors' => [
+									 'required' => 'Condition Name field is required.',
+							 ]
+					 ],
+		];
+		public $allergy = [
+					 'name' => [
+							 'label'  => 'Allergy Name',
+							 'rules'  => 'required',
+							 'errors' => [
+									 'required' => 'Allergy Name field is required.',
+							 ]
+					 ],
 		];
 		public $patient = [
 						'last_name' => [
@@ -524,21 +398,21 @@ class Validation
 								]
 						],
 
-						'relative_name' => [
-								'label'  => 'Relative Name',
-								'rules'  => 'required',
-								'errors' => [
-										'required' => 'Relative Name field is required.'
-								]
-						],
-
-						'relative_contact' => [
-								'label'  => 'Relative Contact',
-								'rules'  => 'required',
-								'errors' => [
-										'required' => 'Relative Contact field is required.'
-								]
-						],
+						// 'relative_name' => [
+						// 		'label'  => 'Relative Name',
+						// 		'rules'  => 'required',
+						// 		'errors' => [
+						// 				'required' => 'Relative Name field is required.'
+						// 		]
+						// ],
+						//
+						// 'relative_contact' => [
+						// 		'label'  => 'Relative Contact',
+						// 		'rules'  => 'required',
+						// 		'errors' => [
+						// 				'required' => 'Relative Contact field is required.'
+						// 		]
+						// ],
 
        ];
 

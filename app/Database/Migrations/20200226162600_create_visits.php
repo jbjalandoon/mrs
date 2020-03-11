@@ -17,12 +17,8 @@ class CreateVisits extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'start_date' => [
-          'type' => 'DATETIME',
-          'comment' => ''
-        ],
-        'end_date' => [
-          'type' => 'DATETIME',
+        'user_id' => [
+          'type' => 'BIGINT',
           'comment' => ''
         ],
         'status' => [
@@ -55,6 +51,9 @@ class CreateVisits extends \CodeIgniter\Database\Migration {
 
     public function down()
     {
-            $this->forge->dropTable($this->table);
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $db->simpleQuery('DELETE FROM '.$this->table);
+      $this->forge->dropTable($this->table);
     }
 }
