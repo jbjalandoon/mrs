@@ -2,11 +2,10 @@
 namespace Modules\SystemSettings\Controllers;
 
 use Modules\UserManagement\Models\PermissionsModel;
-use Modules\SystemSettings\Models\AllergyModel;
 use Modules\SystemSettings\Models\AllergyTypesModel;
 use App\Controllers\BaseController;
 
-class Allergy extends BaseController
+class AllergyTypes extends BaseController
 {
 
 	public function __construct()
@@ -20,25 +19,20 @@ class Allergy extends BaseController
   public function index()
   {
   	$this->hasPermissionRedirect('list-allergy');
-		$model = new AllergyModel();
+		$model = new AllergyTypesModel();
 
+    $data['allergyTypes'] = $model->get(['status'=> 'a']);
+		// print_r($data['allergyTypes']);
 		// die();
-    $data['allergies'] = $model->get(['allergies.status'=> 'a'],[
-			'allergy_types' => ['name' => 'type']
-		],[
-			'allergy_types' => ['allergies.allergy_type_id' => 'allergy_types.id']
-		]);
-    $data['function_title'] = "Allergys List";
-    $data['viewName'] = 'Modules\SystemSettings\Views\allergies\index';
+    $data['function_title'] = "Allergy Types List";
+    $data['viewName'] = 'Modules\SystemSettings\Views\allergyTypes\index';
     echo view('App\Views\theme\index', $data);
   }
 
   public function add()
   {
   	$this->hasPermissionRedirect('add-allergy');
-		$model = new AllergyModel();
-		$type_model = new AllergyTypesModel();
-		$data['allergyTypes'] = $type_model->get(['status' => 'a']);
+		$model = new AllergyTypesModel();
 		if (!empty($_POST)) {
 			if ($this->validate('allergy')) {
 				if ($model->add($_POST)) {
@@ -68,10 +62,8 @@ class Allergy extends BaseController
 
 	function edit($id){
 		$this->hasPermissionRedirect('edit-allergy');
-		$model = new AllergyModel();
+		$model = new AllergyTypesModel();
 		$data['rec'] = $model->find($id);
-		$type_model = new AllergyTypesModel();
-		$data['allergyTypes'] = $type_model->get(['status' => 'a']);
 		if (!empty($_POST)) {
 			if ($this->validate('allergy')) {
 				if ($model->edit($_POST, $id)) {
@@ -101,7 +93,7 @@ class Allergy extends BaseController
 
 	function delete($id){
 		$this->hasPermissionRedirect('delete-allergy');
-		$model = new AllergyModel();
+		$model = new AllergyTypesModel();
 		if($model->softDelete($id)){
 			$_SESSION['success'] = 'You have successfuly Deleted a record';
 			$this->session->markAsFlashdata('success');

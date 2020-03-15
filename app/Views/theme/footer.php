@@ -21,7 +21,7 @@
     <script src="<?= base_url() ?>public/js/select2.full.min.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>public/js/myJavascript.js"></script>
     <script src="<?= base_url() ?>public/js/user_profile.js"></script>
-    <!-- <script>
+    <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
@@ -29,7 +29,22 @@
         $(document).ready(function() {
             $('.js-example-basic-multiple').select2();
         });
-    </script> -->
+        $(document).ready(function() {
+            $('#allergy_id').select2({
+              tags: true
+            });
+        });
+        $(document).ready(function() {
+            $('#condition_id').select2({
+              tags: true
+            });
+        });
+        $(document).ready(function() {
+            $('#reaction_id').select2({
+              tags: true
+            });
+        });
+    </script>
 
   </body>
 </html>

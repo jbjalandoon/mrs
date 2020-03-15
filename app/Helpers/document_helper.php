@@ -1,7 +1,7 @@
 <?php
-if (! function_exists('getdocuments'))
+if (! function_exists('getReactions'))
 {
-	function getdocuments($str_tagged_documents, array $documents)
+	function getReactions($str_tagged_documents, array $documents)
 	{
 		$str_tagged_documents = str_replace("[","", $str_tagged_documents);
 		$str_tagged_documents = str_replace("]","", $str_tagged_documents);
@@ -14,7 +14,7 @@ if (! function_exists('getdocuments'))
 			{
 					if($tagged_document == $document['id'])
 					{
-						echo '<a target="_blank" href="'.base_url().'uploads/'.documentType($document["document_type_id"]).'/'.$document["doc_attachment"].'">'.strtoupper($document['doc_name'])."</a><br>";
+						echo '<li>'.strtoupper($document['name']). '</li>';
 						break;
 					}
 			}

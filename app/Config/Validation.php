@@ -38,6 +38,22 @@ class Validation
 				]
 			]
 		];
+		public $patientAllergy = [
+			'allergy_id' => [
+				'label' => 'Allergy',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Allergy field is required'
+				]
+			],
+			'reaction_id' => [
+				'label' => 'Reaction',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Reaction field is required'
+				]
+			]
+		];
     public $role = [
         'role_name' => [
             'label'  => 'Role Name',
@@ -320,6 +336,15 @@ class Validation
 							 'rules'  => 'required',
 							 'errors' => [
 									 'required' => 'Allergy Name field is required.',
+							 ]
+					 ],
+		];
+		public $reaction = [
+					 'name' => [
+							 'label'  => 'Reaction Name',
+							 'rules'  => 'required',
+							 'errors' => [
+									 'required' => 'Reaction Name field is required.',
 							 ]
 					 ],
 		];

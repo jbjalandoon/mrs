@@ -3,12 +3,12 @@ namespace Modules\SystemSettings\Models;
 
 use App\Models\BaseModel;
 
-class AllergyModel extends BaseModel
+class ReactionModel extends BaseModel
 {
-    protected $table = 'allergies';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['name','description', 'allergy_type_id' ,'status', 'created_at','updated_at', 'deleted_at'];
+    protected $table = 'reactions';
 
+    protected $allowedFields = ['name','description' ,'status', 'created_at','updated_at', 'deleted_at'];
+    
     public function addReturnTheId($val_array = []){
       $val_array['created_at'] = (new \DateTime())->format('Y-m-d H:i:s');
       $val_array['status'] = 'a';
@@ -18,5 +18,4 @@ class AllergyModel extends BaseModel
       $lastId = $lastEntry[0]['id'];
       return $lastId;
     }
-
 }

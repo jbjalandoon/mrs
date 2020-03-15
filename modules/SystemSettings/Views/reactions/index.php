@@ -13,7 +13,7 @@
       search here
    </div>-->
    <div class="col-md-2 offset-md-4">
-    <?php user_add_link('allergies', $_SESSION['userPermmissions']) ?>
+    <?php user_add_link('reactions', $_SESSION['userPermmissions']) ?>
    </div>
  </div>
 <br>
@@ -25,24 +25,22 @@
         <th>#</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Allergy Type</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <?php if (empty($allergies)): ?>
+      <?php if (empty($reactions)): ?>
         <th colspan="4" class="text-center">Empty</th>
       <?php else: ?>
         <?php $cnt = 1; ?>
-        <?php foreach($allergies as $allergy): ?>
-        <tr id="<?php echo $allergy['id']; ?>">
+        <?php foreach($reactions as $reaction): ?>
+        <tr id="<?php echo $reaction['id']; ?>">
           <th scope="row"><?= $cnt++ ?></th>
-          <td><?= ucwords($allergy['name']) ?></td>
-          <td><?= ucwords($allergy['description']) ?></td>
-          <td><?= ucwords($allergy['type']) ?></td>
+          <td><?= ucwords($reaction['name']) ?></td>
+          <td><?= ucwords($reaction['description']) ?></td>
           <td class="text-center">
             <?php
-              users_action('allergies', $_SESSION['userPermmissions'], $allergy['id']);
+              users_action('reactions', $_SESSION['userPermmissions'], $reaction['id']);
             ?>
           </td>
         </tr>

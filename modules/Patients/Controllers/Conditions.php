@@ -60,8 +60,13 @@ class Conditions extends BaseController
 	    else
 	    {
 					$_POST['patient_id'] = $id;
-					// print_r($_POST);
-					// die();
+					if (!is_numeric($_POST['condition_id'])) {
+							$condition_data = [
+								'name' => $_POST['condition_id'],
+								'description' => 'Other Condition',
+							];
+							$_POST['condition_id'] = $condition_model->addReturnTheId($condition_data);
+					}
 	        if($model->add($_POST))
 	        {
 	        	//$permissions_model->update_permitted_role($role_id, $_POST['function_id']);

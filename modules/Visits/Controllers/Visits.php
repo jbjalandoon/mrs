@@ -171,7 +171,7 @@ class Visits extends BaseController
 
 		public function end_visit($vId, $pId){
 			$model = new VisitsModel();
-			if($model->edit($val_array, $vId)){
+			if($model->edit($val_array = [], $vId)){
 				$_SESSION['success'] = 'Visit Has Ended';
 				$this->session->markAsFlashdata('success');
 				return redirect()->to(base_url('patients/show/' . $pId));

@@ -25,24 +25,22 @@
         <th>#</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Allergy Type</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <?php if (empty($allergies)): ?>
+      <?php if (empty($allergyTypes)): ?>
         <th colspan="4" class="text-center">Empty</th>
       <?php else: ?>
         <?php $cnt = 1; ?>
-        <?php foreach($allergies as $allergy): ?>
-        <tr id="<?php echo $allergy['id']; ?>">
+        <?php foreach($allergyTypes as $allergyType): ?>
+        <tr id="<?php echo $allergyType['id']; ?>">
           <th scope="row"><?= $cnt++ ?></th>
-          <td><?= ucwords($allergy['name']) ?></td>
-          <td><?= ucwords($allergy['description']) ?></td>
-          <td><?= ucwords($allergy['type']) ?></td>
+          <td><?= ucwords($allergyType['name']) ?></td>
+          <td><?= ucwords($allergyType['description']) ?></td>
           <td class="text-center">
             <?php
-              users_action('allergies', $_SESSION['userPermmissions'], $allergy['id']);
+              users_action('allergy_types', $_SESSION['userPermmissions'], $allergyType['id']);
             ?>
           </td>
         </tr>

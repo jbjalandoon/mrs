@@ -18,3 +18,12 @@ $routes->group('patient-conditions', ['namespace' => 'Modules\Patients\Controlle
     $routes->get('delete/(:num)/(:num)', 'Conditions::delete/$1/$2');
 
 });
+
+$routes->group('patient-allergies', ['namespace' => 'Modules\Patients\Controllers'], function($routes)
+{
+    $routes->get('(:num)', 'Allergies::index/$1');
+    $routes->match(['get', 'post'], 'add/(:num)', 'Allergies::add/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Allergies::edit/$1/$2');
+    $routes->get('delete/(:num)/(:num)', 'Allergies::delete/$1/$2');
+
+});

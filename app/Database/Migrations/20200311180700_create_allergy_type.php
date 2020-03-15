@@ -1,8 +1,8 @@
 <?php namespace App\Database\Migrations;
 
-class CreateAllergies extends \CodeIgniter\Database\Migration {
+class CreateAllergyType extends \CodeIgniter\Database\Migration {
 
-    private $table = 'allergies';
+    private $table = 'allergy_types';
 
     public function up()
     {
@@ -15,15 +15,10 @@ class CreateAllergies extends \CodeIgniter\Database\Migration {
         ],
         'name' => [
           'type' => 'VARCHAR',
-          'constraint' => '255'
+          'constraint'  => '255'
         ],
         'description' => [
-          'type' => 'TEXT',
-          'constraint' => '255'
-        ],
-        'allergy_type_id' => [
-          'type' => 'TEXT',
-          'constraint' => '255'
+          'type' => 'text'
         ],
         'status' => [
           'type' => 'CHAR',
@@ -50,7 +45,23 @@ class CreateAllergies extends \CodeIgniter\Database\Migration {
 
       $this->forge->addKey('id', TRUE);
       $this->forge->createTable($this->table);
-
+      $data = [
+        [
+            'name' => 'foods',
+            'description' => 'food allergies',
+            'status' => 'a',
+            'created_at' => date('Y-m-d H:i:s')
+        ],
+        [
+            'name' => 'drugs',
+            'description' => 'drug allergies',
+            'status' => 'a',
+            'created_at' => date('Y-m-d H:i:s')
+        ],
+      ];
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $builder->insertBatch($data);
     }
 
     public function down()
