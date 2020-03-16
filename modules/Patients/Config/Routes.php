@@ -27,3 +27,12 @@ $routes->group('patient-allergies', ['namespace' => 'Modules\Patients\Controller
     $routes->get('delete/(:num)/(:num)', 'Allergies::delete/$1/$2');
 
 });
+
+$routes->group('patient-relatives', ['namespace' => 'Modules\Patients\Controllers'], function($routes)
+{
+    $routes->get('(:num)', 'Relatives::index/$1');
+    $routes->match(['get', 'post'], 'add/(:num)', 'Relatives::add/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Relatives::edit/$1/$2');
+    $routes->get('delete/(:num)/(:num)', 'Relatives::delete/$1/$2');
+
+});

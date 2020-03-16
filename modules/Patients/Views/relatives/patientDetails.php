@@ -7,7 +7,7 @@
       </tr>
     </table>
 
-    <h3>Recent Vitals <span class="h6"> <?=isset($latest_vital[0]) ? '(' . date('F d, Y', strtotime($latest_vital[0]['created_at'])) . ')' : ''?></span> </h3>
+    <h3>Recent Vitals <span class="h6"> <?=isset($latest_vital[0]) ? '(' . date('F d, Y', strtotime($latest_vital[0]['start_date'])) . ')' : ''?></span> </h3>
     <table class="table table-border-top">
       <?php if (empty($latest_vital)): ?>
         <tr>
@@ -57,7 +57,7 @@
           <tr>
             <td>
                 <a class="btn form-control btn-light-outline dropdown-toggle" data-toggle="collapse" href="#detail<?=$health['id']?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <?=date('F d, Y', strtotime($health['created_at']))?>
+                  <?=date('F d, Y', strtotime($health['start_date']))?>
                 </a>
                 <div class=" mt-2 collapse" id="detail<?=$health['id']?>">
                   <div class="card card-body">
@@ -146,7 +146,7 @@
             <div class="col-md-12">
               <p>
                 <a class="btn form-control btn-light-outline" data-toggle="collapse" href="#visit<?=$recent_visit['id']?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <span class="float-left"><?=date('F d, Y', strtotime($recent_visit['created_at']))?> <?=$recent_visit['updated_at'] == '' ? ' - Active': ''?></span>
+                  <span class="float-left"><?=date('F d, Y', strtotime($recent_visit['start_date']))?> <?=$recent_visit['end_date'] == '' ? ' - Active': ''?></span>
                 </a>
               </p>
               <div class="collapse" id="visit<?=$recent_visit['id']?>">
@@ -162,7 +162,7 @@
       <?php if (!empty($recent_visits)): ?>
         <?php foreach ($recent_visits as $recent_visit): ?>
           <tr>
-            <td><?=date('F d, Y h:i A', strtotime($recent_visit['created_at']))?> <?=$recent_visit['updated_at'] == '' ? ' - Active': ''?></td>
+            <td><?=date('F d, Y h:i A', strtotime($recent_visit['start_date']))?> <?=$recent_visit['end_date'] == '' ? ' - Active': ''?></td>
           </tr>
         <?php endforeach; ?>
       <?php else: ?>
@@ -227,22 +227,6 @@
                 <a href="#" class="text-dark">Visit Notes</a>
               </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-md-1 offset-md-1">
-                <i class="fa fa-plus-square"></i>
-              </div>
-              <div class="col-md-9">
-                <a href="#" class="text-dark">Attachments</a>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-md-1 offset-md-1">
-                <i class="fa fa-plus-square"></i>
-              </div>
-              <div class="col-md-9">
-                <a href="#" class="text-dark">Appointment</a>
-              </div>
-            </div>
           <?php endif; ?>
         </div>
       </li>
@@ -270,42 +254,17 @@
           </div>
         </div>
       </li>
-      <li class="list-group-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-1">
-              <i class="fa fa-plus-square"></i>
-            </div>
-            <div class="col-md-10">
-              <a class="text-dark" href="<?=base_url().'patient-conditions/' . $profile[0]['id'] ?>">Conditions</a>
-            </div>
+      <li class="list-group-item"><div class="container">
+        <div class="row">
+          <div class="col-md-1">
+            <i class="fa fa-plus-square"></i>
+          </div>
+          <div class="col-md-10">
+            <a class="text-dark" href="<?=base_url().'conditions/' . $profile[0]['id'] ?>">Conditions</a>
           </div>
         </div>
-      </li>
-      <li class="list-group-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-1">
-              <i class="fa fa-plus-square"></i>
-            </div>
-            <div class="col-md-10">
-              <a class="text-dark" href="<?=base_url().'patient-allergies/' . $profile[0]['id'] ?>">Allergies</a>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-1">
-              <i class="fa fa-plus-square"></i>
-            </div>
-            <div class="col-md-10">
-              <a class="text-dark" href="<?=base_url().'patient-relatives/' . $profile[0]['id'] ?>">Relatives</a>
-            </div>
-          </div>
-        </div>
-      </li>
+      </div></li>
+      <li class="list-group-item">Vestibulum at eros</li>
     </ul>
   </div>
 </div>

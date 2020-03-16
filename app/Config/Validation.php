@@ -38,6 +38,24 @@ class Validation
 				]
 			]
 		];
+		public $patientRelative = [
+			'name' => [
+				'label' => 'Name',
+				'rules' => 'required',
+			],
+			'contact_no' => [
+				'label' => 'Contact Number',
+				'rules' => 'required',
+			],
+			'relation' => [
+				'label' => 'Relation',
+				'rules' => 'required',
+			],
+			'address' => [
+				'label' => 'Address',
+				'rules' => 'required',
+			],
+		];
 		public $patientAllergy = [
 			'allergy_id' => [
 				'label' => 'Allergy',
