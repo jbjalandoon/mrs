@@ -17,7 +17,6 @@ class VitalsModel extends BaseModel
 
       $query = $db->query($str);
 
-  		// print_r($query->getResultArray()); die();
   	  return $query->getResultArray();
     }
 

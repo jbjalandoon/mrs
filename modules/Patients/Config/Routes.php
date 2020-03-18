@@ -34,5 +34,22 @@ $routes->group('patient-relatives', ['namespace' => 'Modules\Patients\Controller
     $routes->match(['get', 'post'], 'add/(:num)', 'Relatives::add/$1');
     $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Relatives::edit/$1/$2');
     $routes->get('delete/(:num)/(:num)', 'Relatives::delete/$1/$2');
+});
+$routes->group('visits', ['namespace' => 'Modules\Patients\Controllers'], function($routes)
+{
+    $routes->get('(:num)', 'Visits::index/$1');
+    $routes->match(['get', 'post'], 'add/(:num)', 'Visits::add/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Visits::edit/$1/$2');
+    $routes->get('start/(:num)', 'Visits::start/$1');
+    $routes->get('end/(:num)/(:num)', 'Visits::end/$1/$2');
+    $routes->get('delete/(:num)/(:num)', 'Visits::delete/$1/$2');
+});
+
+$routes->group('attachments', ['namespace' => 'Modules\Patients\Controllers'], function($routes)
+{
+    $routes->get('(:num)', 'Attachments::index/$1');
+    $routes->match(['get', 'post'], 'add/(:num)', 'Attachments::add/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Attachments::edit/$1/$2');
+    $routes->get('delete/(:num)/(:num)', 'Attachments::delete/$1/$2');
 
 });

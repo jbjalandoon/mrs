@@ -5,7 +5,7 @@
         <?php if (!empty($profile)): ?>
           <div class="row mt-5">
             <div class="col-md-4">
-              <h4><?=ucfirst($profile[0]['first_name'] . ' ' . $profile[0]['middle_name'].' ' . $profile[0]['last_name'])?></h4>
+              <a href="<?=base_url(). 'patients/show/' . $profile[0]['id']?>"><h4><?=ucfirst($profile[0]['first_name'] . ' ' . $profile[0]['middle_name'].' ' . $profile[0]['last_name'])?></h4></a>
             </div>
             <div class="col-md-1">
               <strong><?=ucfirst($profile[0]['gender'] == 'm' ? 'Male': 'Female')?></strong>
