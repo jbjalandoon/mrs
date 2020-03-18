@@ -9885,3 +9885,53 @@ nav img
 .table-border-top {
   border-top: 5px solid black;
 }
+
+#cards:hover
+{
+   [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color];
+  box-shadow: 0 3px 10px 0 rgba(0,0,0,0.24);
+}
+
+#recentvisits
+{
+  width: 50%;
+}
+
+#vitalsicon
+{
+  color: red;
+}
+#notesicon
+{
+  color: black;
+}
+#child
+{
+  color: brown;
+}
+#allergy
+{
+  color: #f05e23;
+}
+#weight
+{
+  color: #281e5d;
+}
+#health
+{
+  color: #3bb143;
+}
+#family
+{
+  color: #1338be;
+}
+#calendar
+{
+  color: #b90e0a;
+}
+
+#userimage
+{
+  width: 50px;
+  height: 50px;
+}

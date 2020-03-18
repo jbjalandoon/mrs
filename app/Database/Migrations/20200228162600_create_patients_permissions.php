@@ -166,7 +166,7 @@ class CreatePatientPermissions extends \CodeIgniter\Database\Migration {
                           'status' => 'a',
                           'created_at' => date('Y-m-d H:i:s')
                       ],
-                ];  
+                ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);
                 $builder->insertBatch($data);
