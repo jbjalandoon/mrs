@@ -10,9 +10,9 @@ class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
           [
             'function_name' => 'list of Active Visits',
             'function_description' => 'list of Active visits',
-            'slugs' => 'list-of-Active-Visits',
+            'slugs' => 'list-of-active-visits',
             'name_on_class' => 'index',
-            'page_title' => 'list of Active Visits',
+            'page_title' => 'list of active visits',
             'module_id' => '4',
             'link_icon' => '',
             'order' => '1',

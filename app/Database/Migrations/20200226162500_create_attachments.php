@@ -13,7 +13,7 @@ class CreateAttachments extends \CodeIgniter\Database\Migration {
           'unsigned'  => TRUE,
           'auto_increment' => TRUE
         ],
-        'visits_id' => [
+        'visit_id' => [
           'type' => 'BIGINT',
           'comment' => ''
         ],
@@ -22,6 +22,10 @@ class CreateAttachments extends \CodeIgniter\Database\Migration {
           'comment' => ''
         ],
         'file' => [
+          'type' => 'text',
+          'comment' => ''
+        ],
+        'name' => [
           'type' => 'text',
           'comment' => ''
         ],

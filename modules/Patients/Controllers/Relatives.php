@@ -28,7 +28,6 @@ class Relatives extends BaseController
 
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['relatives'] = $model->get(['status' => 'a', 'patient_id' => $id]);
-    $data['function_title'] = "Relatives List";
 
     $data['viewName'] = 'Modules\Patients\Views\relatives\index';
     echo view('App\Views\theme\index', $data);
@@ -47,7 +46,6 @@ class Relatives extends BaseController
     	if (!$this->validate('patientRelative'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Adding Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\relatives\frmRelative';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -70,7 +68,6 @@ class Relatives extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Adding Patient Condition";
       $data['viewName'] = 'Modules\Patients\Views\relatives\frmRelative';
       echo view('App\Views\theme\index', $data);
   	}
@@ -89,7 +86,6 @@ class Relatives extends BaseController
     	if (!$this->validate('patientRelative'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Adding Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\relatives\frmRelative';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -114,7 +110,6 @@ class Relatives extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Adding Patient Condition";
       $data['viewName'] = 'Modules\Patients\Views\relatives\frmRelative';
       echo view('App\Views\theme\index', $data);
   	}

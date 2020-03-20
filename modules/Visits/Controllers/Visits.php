@@ -20,12 +20,12 @@ class Visits extends BaseController
 
     public function index()
     {
-    	$this->hasPermissionRedirect('list-visits');
-
+    	$this->hasPermissionRedirect('list-of-active-visits');
     	$model = new VisitsModel();
+			// die('here');
 
       $data['visits'] = $model->get(
-				['patients.status'=> 'a', 'visits.end_date' => null], [
+				['patients.status'=> 'a', 'visits.updated_at' => null], [
 					'patients' => [
 						'first_name' => 'first_name',
 						'last_name' => 'last_name',

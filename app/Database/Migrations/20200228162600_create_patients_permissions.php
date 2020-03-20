@@ -7,22 +7,6 @@ class CreatePatientPermissions extends \CodeIgniter\Database\Migration {
         {
                   $data = [
                       [
-                          'name_on_class' => 'patient_own_profile',
-                          'function_name' => 'patient\'s own profile',
-                          'function_description' => 'patients\'s own profile',
-                          'slugs' => 'patient-own-profile',
-                          'page_title' => 'patient\'s own profile',
-                          'module_id' => '3',
-                          'link_icon' => '<i class="far fa-address-card"></i>',
-                          'order' => 1,
-                          'table_name' => 'patients',
-                          'func_action' => 'link',
-                          'func_type' => 1,
-                          'allowed_roles' => '[1]',
-                          'status' => 'a',
-                          'created_at' => date('Y-m-d H:i:s')
-                      ],
-                      [
                           'function_name' => 'show patient details',
                           'function_description' => 'show patient details',
                           'slugs' => 'show-patient',

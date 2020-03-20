@@ -16,7 +16,9 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                                 'type'           => 'VARCHAR',
                                 'constraint'     => '250',
                         ],
-
+                        'module_type'       => [
+                                'type'        => 'INT',
+                        ],
                         'module_description'       => [
                                 'type'           => 'TEXT',
                         ],
@@ -58,6 +60,7 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                   $data = [
                   [
                       'module_name' => 'system settings',
+                      'module_type' => 1,
                       'module_description' => 'system settings',
                       'module_icon' => '<i class="fas fa-cogs"></i>',
                       'order' => 1,
@@ -66,6 +69,7 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                   ],
                   [
                       'module_name' => 'user management',
+                      'module_type' => 1,
                       'module_description' => 'user management',
                       'module_icon' => '<i class="fas fa-users-cog"></i>',
                       'order' => 2,
@@ -74,6 +78,7 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                   ],
                   [
                       'module_name' => 'patients',
+                      'module_type' => 2,
                       'module_description' => 'patients',
                       'module_icon' => '<i class="fas fa-user-injured"></i>',
                       'order' => 3,
@@ -82,28 +87,31 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                   ],
                   [
                       'module_name' => 'visits',
+                      'module_type' => 2,
                       'module_description' => 'visit',
                       'module_icon' => '<i class="fas fa-users-cog"></i>',
                       'order' => 4,
                       'status' => 'a',
                       'created_at' => date('Y-m-d H:i:s')
                   ],
-                  [
-                      'module_name' => 'appointments',
-                      'module_description' => 'appointments',
-                      'module_icon' => '<i class="fas fa-users-cog"></i>',
-                      'order' => 5,
-                      'status' => 'a',
-                      'created_at' => date('Y-m-d H:i:s')
-                  ],
-                  [
-                      'module_name' => 'inventory',
-                      'module_description' => 'inventory',
-                      'module_icon' => '<i class="fas fa-users-cog"></i>',
-                      'order' => 6,
-                      'status' => 'a',
-                      'created_at' => date('Y-m-d H:i:s')
-                  ],
+                  // [
+                  //     'module_name' => 'appointments',
+                  //     'module_type' => 1,
+                  //     'module_description' => 'appointments',
+                  //     'module_icon' => '<i class="fas fa-users-cog"></i>',
+                  //     'order' => 5,
+                  //     'status' => 'a',
+                  //     'created_at' => date('Y-m-d H:i:s')
+                  // ],
+                  // [
+                  //     'module_name' => 'inventory',
+                  //     'module_type' => 2,
+                  //     'module_description' => 'inventory',
+                  //     'module_icon' => '<i class="fas fa-users-cog"></i>',
+                  //     'order' => 6,
+                  //     'status' => 'a',
+                  //     'created_at' => date('Y-m-d H:i:s')
+                  // ],
                 ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);

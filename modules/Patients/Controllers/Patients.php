@@ -4,6 +4,11 @@ namespace Modules\Patients\Controllers;
 use Modules\Visits\Models\VisitsModel;
 use Modules\Visits\Models\VitalsModel;
 use Modules\Patients\Models\PatientsModel;
+use Modules\Patients\Models\ConditionsModel;
+use Modules\Patients\Models\AttachmentsModel;
+use Modules\Patients\Models\AllergyModel;
+use Modules\Patients\Models\RelativesModel;
+use Modules\SystemSettings\Models\ReactionModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
 
@@ -39,7 +44,36 @@ class Patients extends BaseController
 		$model = new PatientsModel();
 		$visit_model = new VisitsModel();
 		$vital_model = new VitalsModel();
+		$condition_model = new ConditionsModel();
+		$allergy_model = new AllergyModel();
+		$reaction_model = new ReactionModel();
+		$relative_model = new RelativesModel();
+		$attachment_model = new AttachmentsModel();
 
+		$data['attachments'] = $attachment_model->get(['attachments.status' => 'a'],[
+			'visits' => ['created_at' => 'visit_date']
+		],[
+			'visits' => ['attachments.visit_id' => 'visits.id']
+		]);
+		// echo "<pre>";
+		// print_r($data['attachments']);
+		// die();
+		$data['allergies'] = $allergy_model->get(['patient_allergies.status' => 'a', 'patient_id' => $id],[
+			'allergies' => ['name' => 'name'],
+			'allergy_types' => ['name' => 'type']
+			],[
+				'allergies' => ['allergies.id' => 'patient_allergies.allergy_id'],
+				'allergy_types' => ['allergies.allergy_type_id' => 'allergy_types.id']
+			]);
+		$data['conditions'] = $condition_model->get(['patient_conditions.status' => 'a', 'patient_id' => $id],[
+			'conditions' => ['name' => 'name']
+		],[
+			'conditions' => ['conditions.id' => 'patient_conditions.condition_id']
+		]);
+		$data['relatives'] = $relative_model->get(['status' => 'a', 'patient_id' => $id]);
+		$data['reactions'] = $reaction_model->get(['status' => 'a']);
+		// print_r($data['conditions']);
+		// die();
 		$data['visit_id'] = $visit_model->getVisitId($id);
 		$data['recent_visits'] = $visit_model->get(['status' => 'a', 'patient_id' => $id]);
 		$data['latest_vital'] = $vital_model->getLatestVital($id);

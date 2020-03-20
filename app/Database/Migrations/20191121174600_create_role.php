@@ -67,27 +67,6 @@ class CreateRole extends \CodeIgniter\Database\Migration {
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
-                    [
-                        'role_name' => 'area user',
-                        'function_id' => 1,
-                        'description' => 'area user',
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'role_name' => 'deparment user',
-                        'function_id' => 1,
-                        'description' => 'deparment user',
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'role_name' => 'academic program',
-                        'function_id' => 1,
-                        'description' => 'deparment user',
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
                 ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);

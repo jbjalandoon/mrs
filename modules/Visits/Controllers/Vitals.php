@@ -157,7 +157,6 @@ class Vitals extends BaseController
 			$patient_model = new PatientsModel();
 			if($_POST){
 				$_POST['user_id'] = $_SESSION['uid'];
-				$_POST['patient_id'] = $id;
 				$_POST['blood_pressure'] = $_POST['blood_pressure_numerator'] . '/' . $_POST['blood_pressure_denominator'];
 				// print_r($_POST);
 				// die();

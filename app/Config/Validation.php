@@ -38,6 +38,22 @@ class Validation
 				]
 			]
 		];
+		public $attachments = [
+			'name' => [
+				'label' => 'Name',
+				'rules' => 'required',
+			],
+			'file' => [
+				'label' => 'File',
+				'rules' => 'uploaded[file]',
+			]
+		];
+		public $attachmentsEdit = [
+			'name' => [
+				'label' => 'Name',
+				'rules' => 'required',
+			],
+		];
 		public $patientRelative = [
 			'name' => [
 				'label' => 'Name',

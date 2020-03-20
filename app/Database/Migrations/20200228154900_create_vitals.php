@@ -17,10 +17,6 @@ class CreateVitals extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'patient_id' => [
-          'type' => 'BIGINT',
-          'comment' => ''
-        ],
         'visit_id' => [
           'type' => 'BIGINT',
           'comment' => ''
@@ -46,7 +42,7 @@ class CreateVitals extends \CodeIgniter\Database\Migration {
           'comment' => ''
         ],
         'blood_pressure' => [
-          'type' => 'int',
+          'type' => 'TEXT',
           'comment' => ''
         ],
         'status' => [

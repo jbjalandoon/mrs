@@ -1,15 +1,7 @@
- <div class="row">
-   <div class="col-md-10">
-      search here
-   </div>
-   <div class="col-md-2">
-    <?php user_add_link('roles', $_SESSION['userPermmissions']) ?>
-   </div>
- </div>
 <br>
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
  <div class="table-responsive">
-   <table class="table table-bordered">
+   <table class="table table-sm table-striped table-bordered index-table">
     <thead class="thead-dark">
       <tr class="text-center">
         <th>#</th>
@@ -26,7 +18,7 @@
         <th scope="row"><?= $cnt++ ?></th>
         <td><?= ucwords($visit['first_name'] . ' ' . $visit['last_name']) ?></td>
         <td><?= $visit['gender'] == 'm' ? 'Male':'Female' ?></td>
-        <td><?= date('F d, Y', strtotime($visit['start_date'])) ?></td>
+        <td><?= date('F d, Y', strtotime($visit['created_at'])) ?></td>
         <td class="text-center">
           <?php
             patient_detail_link('patients', 'show-patient', $_SESSION['userPermmissions'], $visit['patient_id']);

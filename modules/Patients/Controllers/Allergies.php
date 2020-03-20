@@ -40,7 +40,6 @@ class Allergies extends BaseController
 				'allergies' => ['allergies.id' => 'patient_allergies.allergy_id'],
 				'allergy_types' => ['allergies.allergy_type_id' => 'allergy_types.id']
 			]);
-    $data['function_title'] = "Allergy List";
 
     $data['viewName'] = 'Modules\Patients\Views\allergies\index';
     echo view('App\Views\theme\index', $data);
@@ -64,7 +63,6 @@ class Allergies extends BaseController
     	if (!$this->validate('patientAllergy'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Adding Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\allergies\frmAllergy';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -111,7 +109,6 @@ class Allergies extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Adding Patient Condition";
       $data['viewName'] = 'Modules\Patients\Views\allergies\frmAllergy';
       echo view('App\Views\theme\index', $data);
   	}
@@ -137,7 +134,6 @@ class Allergies extends BaseController
     	if (!$this->validate('patientAllergy'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Editing Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\allergies\frmAllergy';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -148,7 +144,6 @@ class Allergies extends BaseController
 							'others' => "required",
 						])){
 							$data['errors'] = \Config\Services::validation()->getErrors();
-							$data['function_title'] = "Adding Patient";
 							$data['viewName'] = 'Modules\Patients\Views\allergies\frmAllergy';
 							return view('App\Views\theme\index', $data);
 						}
@@ -193,7 +188,6 @@ class Allergies extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Editing Patient Allergy";
       $data['viewName'] = 'Modules\Patients\Views\allergies\frmAllergy';
       echo view('App\Views\theme\index', $data);
   	}

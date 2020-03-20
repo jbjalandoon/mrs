@@ -100,22 +100,6 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
 
                 $data = [
                     [
-                        'name_on_class' => 'user_own_profile',
-                        'function_name' => 'user\'s own profile',
-                        'function_description' => 'user\'s own profile',
-                        'slugs' => 'user-own-profile',
-                        'page_title' => 'user\'s own profile',
-                        'module_id' => '2',
-                        'link_icon' => '<i class="far fa-address-card"></i>',
-                        'order' => 1,
-                        'table_name' => 'users',
-                        'func_action' => 'link',
-                        'func_type' => 1,
-                        'allowed_roles' => '[1,2,3,4,5,6,7,8,9,10,11,12]',
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
                         'function_name' => 'show user details',
                         'function_description' => 'show user details',
                         'slugs' => 'show-user',

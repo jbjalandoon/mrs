@@ -1,11 +1,7 @@
- <div class="row">
-   <div class="col-md-10">
-      search here
-   </div>
-   <div class="col-md-2">
-     <!--  <a href="<?= base_url() ?>node/add" class="btn btn-sm btn-primary btn-block float-right">Add Node</a> -->
-   </div>
- </div>
+    </div>
+  </div>
+</div>
+<br>
 <br>
 <form action="<?= base_url() ?>patient-conditions/<?= isset($rec) ? 'edit/'.$rec['id'].'/'.$profile[0]['id'] : 'add/'.$profile[0]['id'] ?>" method="post">
   <div class="row">

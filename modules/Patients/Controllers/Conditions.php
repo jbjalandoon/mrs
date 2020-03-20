@@ -33,7 +33,6 @@ class Conditions extends BaseController
 		], [
 			'conditions' => ['conditions.id' => 'patient_conditions.condition_id']
 		]);
-    $data['function_title'] = "Condition List";
 
     $data['viewName'] = 'Modules\Patients\Views\conditions\index';
     echo view('App\Views\theme\index', $data);
@@ -53,7 +52,6 @@ class Conditions extends BaseController
     	if (!$this->validate('patientCondition'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Adding Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\conditions\frmCondition';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -84,7 +82,6 @@ class Conditions extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Adding Patient Condition";
       $data['viewName'] = 'Modules\Patients\Views\conditions\frmCondition';
       echo view('App\Views\theme\index', $data);
   	}
@@ -105,7 +102,6 @@ class Conditions extends BaseController
     	if (!$this->validate('patientCondition'))
 	    {
 	    	$data['errors'] = \Config\Services::validation()->getErrors();
-	      $data['function_title'] = "Adding Patient";
 	      $data['viewName'] = 'Modules\Patients\Views\conditions\frmCondition';
 	      echo view('App\Views\theme\index', $data);
 	    }
@@ -130,7 +126,6 @@ class Conditions extends BaseController
   	}
   	else
   	{
-    	$data['function_title'] = "Adding Patient Condition";
       $data['viewName'] = 'Modules\Patients\Views\conditions\frmCondition';
       echo view('App\Views\theme\index', $data);
   	}

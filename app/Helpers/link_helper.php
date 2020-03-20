@@ -23,34 +23,25 @@ if (! function_exists('user_primary_links'))
 		{
 			if(hasPrimary($module['id'], $array_permissions))
 			{
-				echo '<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts'. $module['id'].  '" aria-expanded="false" aria-controls="collapseLayouts">';
-				// echo 'Layouts';
-				echo getIcon($module['id'], $_SESSION['appmodules'], false).' '. ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
-				echo '<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i>';
-				echo '</div>';
- 				echo '</a>';
+
+
+				if ($module['module_type'] == 1) {
+					echo '<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts'. $module['id'].  '" aria-expanded="false" aria-controls="collapseLayouts">';
+					// echo 'Layouts';
+					echo getIcon($module['id'], $_SESSION['appmodules'], false).' '. ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
+					echo '<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i>';
+					echo '</div>';
+	 				echo '</a>';
+				}
+				else{
+					echo '<a class="nav-link" href="'.base_url() . $module['module_name'].'">';
+					echo getIcon($module['id'], $_SESSION['appmodules'], false).' '. ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
+					echo "</a>";
+				}
 				foreach($array_permissions as $permission)
 				{
 					if($permission['status'] == 'a' && $permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
 					{
-						if($permission['slugs'] == 'user-own-profile')
-						// .getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .
-						{
-							echo '<div class="collapse" id="collapseLayouts'.$module['id'].'" aria-labelledby="headingOne" data-parent="#sidenavAccordion">';
-							echo '<nav class="sb-sidenav-menu-nested nav">';
-							echo '<a class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'/own/'.$_SESSION['uid'] .'">';
-							echo getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']);
-							echo '</a>';
-							echo '</nav>';
-							echo '</div>';
-							// echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'/own/'.$_SESSION['uid'] .'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
-						}
-						else
-						{
-							if('upload-academic-document' == $permission['slugs'])
-							{
-								$strAdditionalUrl = '/upload-academic-document';
-							}
 							echo '<div class="collapse" id="collapseLayouts'.$module['id'].'" aria-labelledby="headingOne" data-parent="#sidenavAccordion">';
 							echo '<nav class="sb-sidenav-menu-nested nav">';
 							echo '<a class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'">';
@@ -60,7 +51,6 @@ if (! function_exists('user_primary_links'))
 							echo '</div>';
 							// echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).''.$strAdditionalUrl.'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
 							// $strAdditionalUrl = '';
-						}
 					}
 				}
 				// echo '</div>';
@@ -200,6 +190,9 @@ if (! function_exists('users_action'))
 							case 'patient_relatives':
 								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
 							break;
+							case 'attachments':
+								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
+							break;
 							default:
 								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
 							break;
@@ -209,15 +202,15 @@ if (! function_exists('users_action'))
 						switch($table){
 							case 'patient_conditions':
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
-								// echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete\'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 							break;
 							case 'patient_allergies':
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
-								// echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete\'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 							break;
 							case 'patient_relatives':
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
-								// echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete\'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+							break;
+							case 'attachments':
+								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 							break;
 							default:
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';

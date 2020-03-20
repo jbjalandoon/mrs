@@ -3,6 +3,7 @@ namespace Modules\Patients\Controllers;
 
 // use Modules\Visits\Models\RolesModel;
 use Modules\Patients\Models\PatientsModel;
+use Modules\Patients\Models\AttachmentsModel;
 use Modules\Visits\Models\VisitsModel;
 use Modules\Visits\Models\VitalsModel;
 use Modules\UserManagement\Models\PermissionsModel;
@@ -27,14 +28,27 @@ class Visits extends BaseController
     	$model = new VisitsModel();
 			$patient_model = new PatientsModel();
 			$vital_model = new VitalsModel();
+			$attachment_model = new AttachmentsModel();
 
-			$data['vitals'] = $vital_model->get(['patient_id' => $id, 'status' => 'a']);
+			$data['vitals'] = $vital_model->get(['visits.patient_id' => $id, 'vitals.status' => 'a'],[
+				'visits' => ['created_at' => 'visit_date']
+			],[
+				'visits' => ['visits.id' => 'vitals.visit_id']
+			]);
+
+			$data['attachments'] = $attachment_model->get(['visits.patient_id' => $id, 'attachments.status' => 'a'],[
+				'visits' => ['created_at' => 'visit_date']
+			],[
+				'visits' => ['visits.id' => 'attachments.visit_id']
+			]);
+			// print_r($data['attachments']);
+			// die();
 			$data['visit_id'] = $model->getVisitId($id);
       $data['visits'] = $model->orderBy('created_at', 'desc')->get(['status' => 'a', 'patient_id' => $id]);
 			$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
-      $data['function_title'] = "Visits List";
       $data['viewName'] = 'Modules\Patients\Views\visits\index';
       echo view('App\Views\theme\index', $data);
+
     }
 
 
@@ -54,7 +68,6 @@ class Visits extends BaseController
 	    	if (!$this->validate('role'))
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Adding Role";
 		        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
 		        echo view('App\Views\theme\index', $data);
 		    }
@@ -79,7 +92,6 @@ class Visits extends BaseController
     	else
     	{
 
-	    	$data['function_title'] = "Adding Role";
 	        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
 	        echo view('App\Views\theme\index', $data);
     	}
@@ -101,7 +113,6 @@ class Visits extends BaseController
 	    	if (!$this->validate('role'))
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Edit of Role";
 		        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
 		        echo view('App\Views\theme\index', $data);
 		    }
@@ -124,7 +135,6 @@ class Visits extends BaseController
     	}
     	else
     	{
-	    	$data['function_title'] = "Editing of Role";
 	        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
 	        echo view('App\Views\theme\index', $data);
     	}

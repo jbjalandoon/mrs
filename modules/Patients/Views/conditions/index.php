@@ -1,25 +1,20 @@
- <div class="row">
-   <div class="col-md-6 offset-0">
-     <div class="input-group">
-      <input type="text" name="search_item" class="form-control" placeholder="Search Students here">
-      <div class="input-group-append">
-        <button class="btn btn-dark" type="button">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
     </div>
-   </div>
-   <!--<div class="col-md-10">
-      search here
-   </div>-->
-   <div class="col-md-2 offset-md-4">
-    <?php patient_detail_add_link('patient_conditions', $_SESSION['userPermmissions'], $profile[0]['id']) ?>
-   </div>
+  </div>
+</div>
+<br>
+<div class="row">
+
+ <!--<div class="col-md-10">
+    search here
+ </div>-->
+ <div class="col-md-3 offset-md-9">
+  <?php patient_detail_add_link('patient_conditions', $_SESSION['userPermmissions'], $profile[0]['id']) ?>
  </div>
+</div>
 <br>
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
  <div class="table-responsive">
-   <table class="table table-bordered">
+   <table class="table table-sm table-striped table-bordered index-table">
     <thead class="thead-dark">
       <tr class="text-center">
         <th>#</th>
