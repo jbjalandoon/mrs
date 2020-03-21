@@ -48,6 +48,12 @@ class Validation
 				'rules' => 'uploaded[file]',
 			]
 		];
+		public $diagnosis = [
+			'condition_id' => [
+				'label' => 'Condition',
+				'rules' => 'required'
+			]
+		];
 		public $attachmentsEdit = [
 			'name' => [
 				'label' => 'Name',

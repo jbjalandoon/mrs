@@ -22,10 +22,14 @@ class Attachments extends BaseController
 
   public function index($id)
   {
-  	$this->hasPermissionRedirect('list-patient-condition');
+  	$this->hasPermissionRedirect('list-attachment');
 
   	$model = new AttachmentsModel();
 		$patient_model = new PatientsModel();
+		$visit_model = new VisitsModel();
+		$vital_model = new VitalsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['attachments'] = $model->get(['attachments.status' => 'a', 'visits.patient_id' => $id],[
 			'visits' => ['created_at' => 'visit_date']
@@ -38,12 +42,14 @@ class Attachments extends BaseController
   }
 
 	public function add($id){
-		$this->hasPermissionRedirect('add-patient-condition');
+		$this->hasPermissionRedirect('add-attachment');
 		$patient_model = new PatientsModel();
 		$model = new AttachmentsModel();
 		$visit_model = new VisitsModel();
-		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
+		$vital_model = new VitalsModel();
 		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
+		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
   	if(!empty($_POST))
   	{
     	if (!$this->validate('attachments'))
@@ -74,13 +80,13 @@ class Attachments extends BaseController
 
 	        	$_SESSION['success'] = 'You have added a new record';
 						$this->session->markAsFlashdata('success');
-	        	return redirect()->to(base_url('attachments/' . $id));
+	        	return redirect()->to(base_url('visits/' . $id));
 	        }
 	        else
 	        {
 	        	$_SESSION['error'] = 'You have an error in adding a new record';
 						$this->session->markAsFlashdata('error');
-	        	return redirect()->to(base_url('attachments/' . $id));
+	        	return redirect()->to(base_url('visits/' . $id));
 	        }
 	    }
   	}
@@ -92,18 +98,22 @@ class Attachments extends BaseController
 	}
 
 	public function edit($id, $pId){
-		$this->hasPermissionRedirect('edit-patient-condition');
+		$this->hasPermissionRedirect('edit-attachment');
 		$patient_model = new PatientsModel();
 		helper(['form', 'url']);
 		$model = new AttachmentsModel();
 		$visit_model = new VisitsModel();
+		$vital_model = new VitalsModel();
+		$data['visit_id'] = $visit_model->getVisitId($pId);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
+		// die($data['vital_recorded']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
-		$data['visit_id'] = $visit_model->getVisitId($id);
 
+		$data['rec'] = $model->find($id);
 		$data['rec'] = $model->find($id);
 		// print_r($data['rec']);
 		// die();
-		$data['profile'] = $patient_model->get(['status' => 'a','id' => $pId]);
+		// $data['profile'] = $patient_model->get(['status' => 'a','id' => $pId]);
   	if(!empty($_POST))
   	{
     	if (!$this->validate('attachmentsEdit'))
@@ -137,13 +147,13 @@ class Attachments extends BaseController
 	        	//$permissions_model->update_permitted_role($role_id, $_POST['function_id']);
 	        	$_SESSION['success'] = 'You have added a new record';
 						$this->session->markAsFlashdata('success');
-	        	return redirect()->to(base_url('attachments/' . $pId));
+	        	return redirect()->to(base_url('visits/' . $pId));
 	        }
 	        else
 	        {
 	        	$_SESSION['error'] = 'You have an error in adding a new record';
 						$this->session->markAsFlashdata('error');
-	        	return redirect()->to(base_url('attachments/' . $pId));
+	        	return redirect()->to(base_url('visits/' . $pId));
 	        }
 	    }
   	}
@@ -155,17 +165,17 @@ class Attachments extends BaseController
 	}
 
 	public function delete($id, $Pid){
-		$this->hasPermissionRedirect('delete-patient-condition');
+		$this->hasPermissionRedirect('delete-attachment');
   	$model = new AttachmentsModel();
 		if ($model->softDelete($id)) {
 			$_SESSION['success'] = 'You have Deleted a record';
 			$this->session->markAsFlashdata('success');
-			return redirect()->to(base_url('attachments/' . $Pid));
+			return redirect()->to(base_url('visits/' . $pId));
 		}
 		else{
 			$_SESSION['error'] = 'You an error in updating a record';
 			$this->session->markAsFlashdata('error');
-			return redirect()->to( base_url('attachments/' . $Pid));
+			return redirect()->to( base_url('visits/' . $pId));
 		}
 	}
 

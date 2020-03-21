@@ -22,15 +22,15 @@ class CreateVitals extends \CodeIgniter\Database\Migration {
           'comment' => ''
         ],
         'weight' => [
-          'type' => 'int',
+          'type' => 'float',
           'comment' => ''
         ],
         'height' => [
-          'type' => 'int',
+          'type' => 'float',
           'comment' => ''
         ],
         'temperature' => [
-          'type' => 'int',
+          'type' => 'float',
           'comment' => ''
         ],
         'respiratory_rate' => [

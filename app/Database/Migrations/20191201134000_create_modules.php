@@ -89,7 +89,7 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                       'module_name' => 'visits',
                       'module_type' => 2,
                       'module_description' => 'visit',
-                      'module_icon' => '<i class="fas fa-users-cog"></i>',
+                      'module_icon' => '<i class="fas fa-clipboard-check"></i>',
                       'order' => 4,
                       'status' => 'a',
                       'created_at' => date('Y-m-d H:i:s')

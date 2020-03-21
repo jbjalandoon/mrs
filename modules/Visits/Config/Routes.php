@@ -8,4 +8,5 @@ $routes->group('visits', ['namespace' => 'Modules\Visits\Controllers'], function
 $routes->group('vitals', ['namespace' => 'Modules\Visits\Controllers'], function($routes)
 {
     $routes->match(['get', 'post'], 'capture/(:num)', 'Vitals::capture_vital/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Vitals::edit/$1/$2');
 });

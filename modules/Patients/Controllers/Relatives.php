@@ -21,11 +21,14 @@ class Relatives extends BaseController
 
   public function index($id)
   {
-  	$this->hasPermissionRedirect('list-patient-condition');
+  	$this->hasPermissionRedirect('list-patient-relative');
 
   	$model = new RelativesModel();
   	$patient_model = new PatientsModel();
-
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['relatives'] = $model->get(['status' => 'a', 'patient_id' => $id]);
 
@@ -34,9 +37,12 @@ class Relatives extends BaseController
   }
 
 	public function add($id){
-		$this->hasPermissionRedirect('add-patient-condition');
+		$this->hasPermissionRedirect('add-patient-relative');
 		$patient_model = new PatientsModel();
-
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 
 		$model = new RelativesModel();
@@ -74,11 +80,14 @@ class Relatives extends BaseController
 	}
 
 	public function edit($id, $pId){
-		$this->hasPermissionRedirect('edit-patient-condition');
+		$this->hasPermissionRedirect('edit-patient-relative');
 
 		$model = new RelativesModel();
   	$patient_model = new PatientsModel();
-
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($pId);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['rec'] = $model->find($id);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $pId]);
   	if(!empty($_POST))
@@ -116,7 +125,7 @@ class Relatives extends BaseController
 	}
 
 	public function delete($id, $Pid){
-		$this->hasPermissionRedirect('delete-patient-condition');
+		$this->hasPermissionRedirect('delete-patient-relative');
   	$model = new RelativesModel();
 		if ($model->softDelete($id)) {
 			$_SESSION['success'] = 'You have Deleted a record';

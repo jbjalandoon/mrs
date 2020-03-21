@@ -6,6 +6,7 @@ use Modules\Visits\Models\VitalsModel;
 use Modules\Patients\Models\PatientsModel;
 use Modules\Patients\Models\ConditionsModel;
 use Modules\Patients\Models\AttachmentsModel;
+use Modules\Patients\Models\DiagnosisModel;
 use Modules\Patients\Models\AllergyModel;
 use Modules\Patients\Models\RelativesModel;
 use Modules\SystemSettings\Models\ReactionModel;
@@ -49,15 +50,24 @@ class Patients extends BaseController
 		$reaction_model = new ReactionModel();
 		$relative_model = new RelativesModel();
 		$attachment_model = new AttachmentsModel();
+		$diagnosis_model = new DiagnosisModel();
 
-		$data['attachments'] = $attachment_model->get(['attachments.status' => 'a'],[
+		$data['attachments'] = $attachment_model->get(['attachments.status' => 'a', 'visits.patient_id' => $id],[
 			'visits' => ['created_at' => 'visit_date']
 		],[
 			'visits' => ['attachments.visit_id' => 'visits.id']
 		]);
-		// echo "<pre>";
-		// print_r($data['attachments']);
-		// die();
+		$data['diagnosis'] = $diagnosis_model->get(['visits.patient_id' => $id, 'diagnosis.status' => 'a'],[
+			'visits' => ['created_at' => 'visit_date'],
+			'conditions' => ['name' => 'condition_name'],
+			'diagnosis_type' => ['name' => 'type_name'],
+			'users' => ['firstname' => 'firstname', 'lastname' => 'lastname']
+		],[
+			'visits' => ['visits.id' => 'diagnosis.visit_id'],
+			'conditions' => ['conditions.id' => 'diagnosis.condition_id'],
+			'diagnosis_type' => ['diagnosis_type.id' => 'diagnosis.diagnosis_type_id'],
+			'users' => ['users.id' => 'diagnosis.user_id']
+		]);
 		$data['allergies'] = $allergy_model->get(['patient_allergies.status' => 'a', 'patient_id' => $id],[
 			'allergies' => ['name' => 'name'],
 			'allergy_types' => ['name' => 'type']

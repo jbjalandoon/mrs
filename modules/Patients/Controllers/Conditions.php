@@ -26,7 +26,10 @@ class Conditions extends BaseController
 
   	$model = new PatientConditionModel();
   	$patient_model = new PatientsModel();
-
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['conditions'] = $model->get(['patient_conditions.status' => 'a', 'patient_id' => $id],[
 			'conditions' => ['name' => 'name']
@@ -44,7 +47,10 @@ class Conditions extends BaseController
 		$model = new PatientConditionModel();
   	$patient_model = new PatientsModel();
 		$condition_model = new ConditionsModel();
-
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['conditions'] = $condition_model->get(['status' => 'a']);
   	if(!empty($_POST))
@@ -93,7 +99,11 @@ class Conditions extends BaseController
 		$model = new PatientConditionModel();
   	$patient_model = new PatientsModel();
 		$condition_model = new ConditionsModel();
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($pId);
 
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['rec'] = $model->find($id);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $pId]);
 		$data['conditions'] = $condition_model->get(['status' => 'a']);

@@ -1,43 +1,3 @@
-        <div class="card-footer w-100 text-muted">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <div class="nav-link" style="">
-                <i class="fas fa-clipboard-check"></i> <a href="<?= base_url(). 'visits' . '/'?><?= $visit_id != 0 ? 'end/' . $visit_id .'/'. $profile[0]['id'] : 'start/' . $profile[0]['id']?> " class="text-dark"><?= $visit_id != 0 ? 'End Visit': 'Start Visit'?></a>
-              </div>
-              <?php if ($visit_id != 0): ?>
-                <div class="nav-link" style="text-align: center;">
-                  <i id="vitalsicon" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-heartbeat"></i> <a href="<?=base_url(). 'vitals/capture/' . $profile[0]['id']?>" class="text-dark" <?=$vital_recorded == 0 ? '': 'style="pointer-events: none"'?>>Capture Vitals</a>
-                </div>
-                <div class="nav-link">
-                  <i id="notesicon" class="fas fa-notes-medical"></i> <a href="<?=base_url(). 'attachments/' . $profile[0]['id']?>" class="text-dark">Attachment</a>
-                </div>
-                <div class="nav-link">
-                  <i id="notesicon" class="fas fa-notes-medical"></i> <a href="#" class="text-dark">Diagnosis</a>
-                </div>
-              <?php endif; ?>
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <div class="nav-link" style="">
-                <i class="fas fa-file-prescription"></i> <a class="text-dark" href="<?=base_url().'patient-conditions/' . $profile[0]['id'] ?>">Conditions</a>
-              </div>
-              <div class="nav-link" style="">
-                <i class="fas fa-file-prescription"></i> <a class="text-dark" href="<?=base_url().'patient-allergies/' . $profile[0]['id'] ?>">Allergies</a>
-              </div>
-              <div class="nav-link" style="">
-                <i class="fas fa-file-prescription"></i> <a class="text-dark" href="<?=base_url().'patient-relatives/' . $profile[0]['id'] ?>">Relatives</a>
-              </div>
-              <div class="nav-link" style="">
-                <i class="fas fa-user-edit"></i> <a class="text-dark" href="<?=base_url() . 'patients/edit/' . $profile[0]['id'] ?>">Edit</a>
-              </div>
-              <div class="nav-link">
-                <i class="fas fa-trash-alt"></i> <a class="text-dark" href="#" onClick="confirmDelete('<?=base_url().'patients/delete/'?>' , <?=$profile[0]['id']?>)">Delete</a>
-              </div>
-            </form>
-          </div>
-        </nav>
-      </div>
     </div>
   </div>
 </div>
@@ -48,7 +8,24 @@
       <div id="cards" class="card border-light">
         <div class="card-header"><h5><i id="child" class="fas fa-diagnoses"></i> Diagnosis</h5></div>
         <div class="card-body">
-          <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
+          <?php if (empty($diagnosis)): ?>
+            <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
+          <?php else: ?>
+            <table class="table" style="width: 100%;">
+              <tr>
+                <th>Diagnosis</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+              <?php foreach ($diagnosis as $diagnose): ?>
+                <tr style="border-bottom: 1px solid #ddd">
+                  <td> <b><?=ucwords($diagnose['condition_name'])?></b> </td>
+                  <td> <?=ucwords($diagnose['type_name'])?> </td>
+                  <td><?=$diagnose['is_confirmed'] == 1 ? 'Confirmed': 'Suspect'?></td>
+                </tr>
+              <?php endforeach; ?>
+            </table>
+          <?php endif; ?>
         </div>
       </div>
       <br>
@@ -61,31 +38,31 @@
             <table  style="width: 100%;">
               <?php foreach ($latest_vital as $health): ?>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Weight</td>
+                  <td> <b>Weight</b> </td>
                   <td><?=$health['weight']?> kg.</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Height</td>
+                  <td> <b>Height</b> </td>
                   <td><?=$health['height']?> cm.</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>BMI</td>
+                  <td> <b>BMI</b> </td>
                   <td><?= ($health['weight'] / $health['height'] / $health['height']) * 10000 ?> </td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Temperature</td>
+                  <td> <b>Temperature</b> </td>
                   <td><?=$health['temperature']?> C.</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Respiratory rate</td>
+                  <td> <b>Respiratory Rate</b> </td>
                   <td><?=$health['respiratory_rate']?> / min</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Pulse Rate</td>
+                  <td> <b>Pulse Rate</b> </td>
                   <td><?=$health['pulse_rate']?> / min</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td>Blood Pressure</td>
+                  <td> <b>Blood Pressure</b> </td>
                   <td><?=$health['blood_pressure']?></td>
                 </tr>
               <?php endforeach; ?>
@@ -159,9 +136,14 @@
           <?php if (empty($conditions)): ?>
             <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
-            <table  style="width: 100%;">
+            <table class="table" style="width: 100%;">
+              <tr>
+                <th>Condition</th>
+                <th>Status</th>
+              </tr>
               <?php foreach ($conditions as $condition): ?>
                 <tr style="border-bottom: 1px solid #ddd">
+                  <td> <b><?=ucwords($condition['name'])?></b> </td>
                   <td>
                     <?php
                     if ($condition['patient_condition_status'] == 1) {
@@ -173,7 +155,6 @@
                     }
                     ?>
                   </td>
-                  <td><?=ucwords($condition['name'])?></td>
                 </tr>
               <?php endforeach; ?>
             </table>
@@ -188,22 +169,16 @@
           <?php if (empty($allergies)): ?>
             <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
-            <table  style="width: 100%;">
+            <table class="table" style="width: 100%;">
+              <tr>
+                <th>Allergy</th>
+                <th>Type</th>
+                <th>Reaction</th>
+              </tr>
               <?php foreach ($allergies as $allergy): ?>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td><?= ucwords($allergy['name']) ?></td>
+                  <td> <b><?= ucwords($allergy['name']) ?></b> </td>
                   <td><?= $allergy['type'] == null ? 'Others' : ucwords($allergy['type']) ?></td>
-                  <td>
-                    <?php if ($allergy['severity'] == 1): ?>
-                      Mild
-                    <?php endif; ?>
-                    <?php if ($allergy['severity'] == 2): ?>
-                      Moderate
-                    <?php endif; ?>
-                    <?php if ($allergy['severity'] == 3): ?>
-                      Severe
-                    <?php endif; ?>
-                  </td>
                   <td>
                     <?php getReactions($allergy['reaction_id'], $reactions) ?>
                   </td>
@@ -237,7 +212,7 @@
               <?php foreach ($recent_visits as $recent_visit): ?>
                 <tr style="border-bottom: 1px solid #ddd">
                   <td>
-                    <span class="float-left"><?=date('F d, Y', strtotime($recent_visit['created_at']))?> <?=$recent_visit['updated_at'] == '' ? ' - Active': ''?></span>
+                    <span class="float-left"><?=date('F d, Y', strtotime($recent_visit['created_at']))?> <?=$recent_visit['updated_at'] == '' ? ' - Active': ' - ' . date('F d, Y', strtotime($recent_visit['updated_at']))?></span>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -252,10 +227,14 @@
           <?php if (empty($attachments)): ?>
             <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
-            <table  style="width: 100%;">
+            <table class="table" style="width: 100%;">
+              <tr>
+                <th>File</th>
+                <th>Download</th>
+              </tr>
               <?php foreach ($attachments as $attachment): ?>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td><?= ucwords($attachment['name']) ?></td>
+                  <td> <b><?= ucwords($attachment['name']) ?></b> </td>
                   <td> <a target="_blank" href="<?=base_url().'uploads/'.$attachment['file']?>">Download Here</a> </td>
                 </tr>
               <?php endforeach; ?>
@@ -266,15 +245,20 @@
       </div>
 <br>
       <div id="cards" class="card border-light">
-        <div class="card-header"><h5><i id="family" class="fas fa-users"></i> Family</h5></div>
+        <div class="card-header"><h5><i id="family" class="fas fa-users"></i> Relatives</h5></div>
         <div class="card-body">
           <?php if (empty($relatives)): ?>
             <p style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
-            <table  style="width: 100%;">
+            <table class="table" style="width: 100%;">
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Relation</th>
+              </tr>
               <?php foreach ($relatives as $relative): ?>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <td><?= ucwords($relative['name']) ?></td>
+                  <td> <b><?= ucwords($relative['name']) ?></b> </td>
                   <td><?= ucwords($relative['contact_no']) ?></td>
                   <td><?= ucwords($relative['relation']) ?></td>
                 </tr>

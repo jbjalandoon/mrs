@@ -24,14 +24,18 @@ class Allergies extends BaseController
 
   public function index($id)
   {
-  	$this->hasPermissionRedirect('list-patient-condition');
+  	$this->hasPermissionRedirect('list-patient-allergy');
 
   	$model = new PatientAllergyModel();
   	$patient_model = new PatientsModel();
 		$reaction_model = new ReactionModel();
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
 
 		$data['reactions'] = $reaction_model->get(['status' => 'a']);
+		$data['visit_id'] = $visit_model->getVisitId($id);
 
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['patient_allergies'] = $model->get(['patient_allergies.status' => 'a', 'patient_id' => $id],[
 			'allergies' => ['name' => 'name'],
@@ -46,14 +50,17 @@ class Allergies extends BaseController
   }
 
 	public function add($id){
-		$this->hasPermissionRedirect('add-patient-condition');
-
+		$this->hasPermissionRedirect('add-patient-allergy');
+		$visit_model = new VisitsModel();
 		$model = new PatientAllergyModel();
   	$patient_model = new PatientsModel();
 		$allergy_model = new AllergyModel();
 		$type_model = new AllergyTypesModel();
 		$reaction_model = new ReactionModel();
+		$vital_model = new VitalsModel();
+		$data['visit_id'] = $visit_model->getVisitId($id);
 
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['allergies'] = $allergy_model->get(['status' => 'a']);
 		$data['allergy_types'] = $type_model->get(['status' => 'a']);
@@ -115,14 +122,18 @@ class Allergies extends BaseController
 	}
 
 	public function edit($id, $pId){
-		$this->hasPermissionRedirect('edit-patient-condition');
+		$this->hasPermissionRedirect('edit-patient-allergy');
 
 		$model = new PatientAllergyModel();
 		$patient_model = new PatientsModel();
 		$allergy_model = new AllergyModel();
 		$type_model = new AllergyTypesModel();
 		$reaction_model = new ReactionModel();
+		$vital_model = new VitalsModel();
+		$visit_model = new VisitsModel();
+		$data['visit_id'] = $visit_model->getVisitId($pId);
 
+		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['allergies'] = $allergy_model->get(['status' => 'a']);
 		$data['allergy_types'] = $type_model->get(['status' => 'a']);
 		$data['reactions'] = $reaction_model->get(['status' => 'a']);

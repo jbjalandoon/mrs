@@ -11,7 +11,7 @@
         <select id="condition_id" class="form-control <?= isset($errors['condition_id']) ? 'is-invalid':'is-valid' ?>" name="condition_id">
           <option value="1" disabled selected>-- Choose a Condition --</option>
           <?php foreach ($conditions as $condition): ?>
-              <option value="<?=$condition['id']?>" <?=$rec['condition_id'] == $condition['id'] ? 'selected' : ''?>><?=ucwords($condition['name'])?></option>
+              <option value="<?=$condition['id']?>" <?=isset($rec['condition_id']) ? $rec['condition_id'] == $condition['id'] ? 'selected' : '' : ''?>><?=ucwords($condition['name'])?></option>
           <?php endforeach; ?>
         </select>
           <?php if(isset($errors['condition_id'])): ?>

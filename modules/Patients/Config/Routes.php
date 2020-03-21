@@ -53,3 +53,11 @@ $routes->group('attachments', ['namespace' => 'Modules\Patients\Controllers'], f
     $routes->get('delete/(:num)/(:num)', 'Attachments::delete/$1/$2');
 
 });
+$routes->group('diagnosis', ['namespace' => 'Modules\Patients\Controllers'], function($routes)
+{
+    $routes->get('(:num)', 'Diagnosis::index/$1');
+    $routes->match(['get', 'post'], 'add/(:num)', 'Diagnosis::add/$1');
+    $routes->match(['get', 'post'], 'edit/(:num)/(:num)', 'Diagnosis::edit/$1/$2');
+    $routes->get('delete/(:num)/(:num)', 'Diagnosis::delete/$1/$2');
+
+});

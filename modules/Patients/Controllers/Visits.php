@@ -4,6 +4,7 @@ namespace Modules\Patients\Controllers;
 // use Modules\Visits\Models\RolesModel;
 use Modules\Patients\Models\PatientsModel;
 use Modules\Patients\Models\AttachmentsModel;
+use Modules\Patients\Models\DiagnosisModel;
 use Modules\Visits\Models\VisitsModel;
 use Modules\Visits\Models\VitalsModel;
 use Modules\UserManagement\Models\PermissionsModel;
@@ -23,13 +24,16 @@ class Visits extends BaseController
 
     public function index($id)
     {
-    	// $this->hasPermissionRedirect('list-visits');
+    	$this->hasPermissionRedirect('list-of-active-visits');
 
     	$model = new VisitsModel();
 			$patient_model = new PatientsModel();
 			$vital_model = new VitalsModel();
+			$diagnosis_model = new DiagnosisModel();
 			$attachment_model = new AttachmentsModel();
-
+			$visit_model = new VisitsModel();
+			$data['visit_id'] = $visit_model->getVisitId($id);
+			$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 			$data['vitals'] = $vital_model->get(['visits.patient_id' => $id, 'vitals.status' => 'a'],[
 				'visits' => ['created_at' => 'visit_date']
 			],[
@@ -41,6 +45,18 @@ class Visits extends BaseController
 			],[
 				'visits' => ['visits.id' => 'attachments.visit_id']
 			]);
+
+			$data['diagnosis'] = $diagnosis_model->get(['visits.patient_id' => $id, 'diagnosis.status' => 'a'],[
+				'visits' => ['created_at' => 'visit_date'],
+				'conditions' => ['name' => 'condition_name'],
+				'diagnosis_type' => ['name' => 'type_name'],
+				'users' => ['firstname' => 'firstname', 'lastname' => 'lastname']
+			],[
+				'visits' => ['visits.id' => 'diagnosis.visit_id'],
+				'conditions' => ['conditions.id' => 'diagnosis.condition_id'],
+				'diagnosis_type' => ['diagnosis_type.id' => 'diagnosis.diagnosis_type_id'],
+				'users' => ['users.id' => 'diagnosis.user_id']
+			]);
 			// print_r($data['attachments']);
 			// die();
 			$data['visit_id'] = $model->getVisitId($id);
@@ -49,103 +65,6 @@ class Visits extends BaseController
       $data['viewName'] = 'Modules\Patients\Views\visits\index';
       echo view('App\Views\theme\index', $data);
 
-    }
-
-
-    public function add()
-    {
-    	$this->hasPermissionRedirect('add-role');
-
-    	$permissions_model = new PermissionsModel();
-
-    	$data['permissions'] = $this->permissions;
-
-    	helper(['form', 'url']);
-    	$model = new RolesModel();
-
-    	if(!empty($_POST))
-    	{
-	    	if (!$this->validate('role'))
-		    {
-		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
-		        echo view('App\Views\theme\index', $data);
-		    }
-		    else
-		    {
-		        if($model->addRoles($_POST))
-		        {
-		        	$role_id = $model->insertID();
-		        	$permissions_model->update_permitted_role($role_id, $_POST['function_id']);
-		        	$_SESSION['success'] = 'You have added a new record';
-					$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('roles'));
-		        }
-		        else
-		        {
-		        	$_SESSION['error'] = 'You have an error in adding a new record';
-					$this->session->markAsFlashdata('error');
-		        	return redirect()->to(base_url('roles'));
-		        }
-		    }
-    	}
-    	else
-    	{
-
-	        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
-	        echo view('App\Views\theme\index', $data);
-    	}
-    }
-
-    public function edit($id)
-    {
-    	$this->hasPermissionRedirect('edit-role');
-    	helper(['form', 'url']);
-    	$model = new RolesModel();
-    	$data['rec'] = $model->find($id);
-
-    	$permissions_model = new PermissionsModel();
-
-    	$data['permissions'] = $this->permissions;
-
-    	if(!empty($_POST))
-    	{
-	    	if (!$this->validate('role'))
-		    {
-		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
-		        echo view('App\Views\theme\index', $data);
-		    }
-		    else
-		    {
-		    	if($model->editRoles($_POST, $id))
-		        {
-		        	$permissions_model->update_permitted_role($id, $_POST['function_id'], $data['rec']['function_id']);
-		        	$_SESSION['success'] = 'You have updated a record';
-							$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('roles'));
-		        }
-		        else
-		        {
-		        	$_SESSION['error'] = 'You an errot in updating a record';
-					$this->session->markAsFlashdata('error');
-		        	return redirect()->to( base_url('roles'));
-		        }
-		    }
-    	}
-    	else
-    	{
-	        $data['viewName'] = 'Modules\Visits\Views\roles\frmRole';
-	        echo view('App\Views\theme\index', $data);
-    	}
-    }
-
-    public function delete($id)
-    {
-    	$this->hasPermissionRedirect('delete-role');
-
-    	$model = new RolesModel();
-    	$model->deleteRole($id);
     }
 
 		public function start($id){
@@ -165,7 +84,7 @@ class Visits extends BaseController
 			if($model->edit($val_array = [], $vId)){
 				$_SESSION['success'] = 'Visit Has Ended';
 				$this->session->markAsFlashdata('success');
-				return redirect()->to(base_url('visits/' . $pId));
+				return redirect()->to(base_url('patients/show/' . $pId));
 			}
 		}
 

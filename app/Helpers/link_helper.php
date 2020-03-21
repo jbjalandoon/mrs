@@ -187,6 +187,12 @@ if (! function_exists('users_action'))
 							case 'patient_allergies':
 								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
 							break;
+							case 'diagnosis':
+								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
+							break;
+							case 'vitals':
+								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i> Edit Vitals</a> ';
+							break;
 							case 'patient_relatives':
 								echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
 							break;
@@ -207,6 +213,9 @@ if (! function_exists('users_action'))
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 							break;
 							case 'patient_relatives':
+								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+							break;
+							case 'diagnosis':
 								echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 							break;
 							case 'attachments':

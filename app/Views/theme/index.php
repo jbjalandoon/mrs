@@ -38,6 +38,46 @@
               </div>
             </div>
             <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <div class="nav-link" style="">
+                    <i class="fas fa-clipboard-check"></i> <a href="<?= base_url(). 'visits' . '/'?><?= $visit_id != 0 ? 'end/' . $visit_id .'/'. $profile[0]['id'] : 'start/' . $profile[0]['id']?> " class="text-dark"><?= $visit_id != 0 ? 'End Visit': 'Start Visit'?></a>
+                  </div>
+                  <?php if ($visit_id != 0): ?>
+                    <div class="nav-link" style="text-align: center;">
+                      <i id="vitalsicon" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-heartbeat"></i> <a href="<?=base_url(). 'vitals/capture/' . $profile[0]['id']?>" class="text-dark" <?=$vital_recorded == 0 ? '': 'style="pointer-events: none"'?>>Capture Vitals</a>
+                    </div>
+                    <div class="nav-link">
+                      <i id="notesicon" class="fas fa-notes-medical"></i> <a href="<?=base_url(). 'attachments/add/' . $profile[0]['id']?>" class="text-dark">Attachment</a>
+                    </div>
+                    <div class="nav-link">
+                      <i id="notesicon" class="fas fa-diagnoses"></i> <a href="<?=base_url(). 'diagnosis/add/' . $profile[0]['id']?>" class="text-dark">Diagnosis</a>
+                    </div>
+                  <?php endif; ?>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <div class="nav-link" style="">
+                    <i class="fas fa-child"></i> <a class="text-dark" href="<?=base_url().'patient-conditions/' . $profile[0]['id'] ?>">Conditions</a>
+                  </div>
+                  <div class="nav-link" style="">
+                    <i class="fas fa-allergies"></i> <a class="text-dark" href="<?=base_url().'patient-allergies/' . $profile[0]['id'] ?>">Allergies</a>
+                  </div>
+                  <div class="nav-link" style="">
+                    <i class="fas fa-users"></i> <a class="text-dark" href="<?=base_url().'patient-relatives/' . $profile[0]['id'] ?>">Relatives</a>
+                  </div>
+                  <div class="nav-link" style="">
+                    <i class="fas fa-user-edit"></i> <a class="text-dark" href="<?=base_url() . 'patients/edit/' . $profile[0]['id'] ?>">Edit</a>
+                  </div>
+                  <div class="nav-link">
+                    <i class="fas fa-trash-alt"></i> <a class="text-dark" href="#" onClick="confirmDelete('<?=base_url().'patients/delete/'?>' , <?=$profile[0]['id']?>)">Delete</a>
+                  </div>
+                </form>
+              </div>
+            </nav>
+          </div>
         <?php endif; ?>
         <?php if (isset($function_title)): ?>
           <h1 id="page-title"><?= $function_title ?></h1>

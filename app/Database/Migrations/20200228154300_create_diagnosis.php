@@ -17,6 +17,18 @@ class CreateDiagnosis extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
+        'visit_id' => [
+          'type' => 'BIGINT',
+          'comment' => ''
+        ],
+        'user_id' => [
+          'type' => 'BIGINT',
+          'comment' => ''
+        ],
+        'is_confirmed' => [
+          'type' => 'INT',
+          'comment' => ''
+        ],
         'diagnosis_type_id' => [
           'type' => 'BIGINT',
           'comment' => ''
