@@ -79,11 +79,15 @@
             </nav>
           </div>
         <?php endif; ?>
-        <?php if (isset($function_title)): ?>
-          <h1 id="page-title"><?= $function_title ?></h1>
-        <?php endif; ?>
-        <?php echo view($viewName); ?>
         <br>
+        <?php if (isset($function_title)): ?>
+          <!-- <h1 id="page-title"><?= $function_title ?></h1> -->
+          <?php $data['function_title'] = $function_title ?>
+          <?php echo view($viewName, $data); ?>
+          <?php else: ?>
+            <br>
+            <?php echo view($viewName); ?>
+        <?php endif; ?>
         <br>
         <br>
 <?= view('App\Views\theme\footer') ?>

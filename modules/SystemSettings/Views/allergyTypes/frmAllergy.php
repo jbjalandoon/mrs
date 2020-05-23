@@ -1,17 +1,15 @@
- <div class="row">
-   <div class="col-md-10">
-      search here
-   </div>
-   <div class="col-md-2">
-     <!--  <a href="<?= base_url() ?>node/add" class="btn btn-sm btn-primary btn-block float-right">Add Node</a> -->
-   </div>
- </div>
 <br>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>Adding Allergy Type</h1>
+    <hr>
+  </div>
+</div>
 <form action="<?= base_url() ?>allergies/<?= isset($rec) ? 'edit/'.$rec['id'] : 'add' ?>" method="post">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="form-group">
-        <label for="name">Allergy Name</label>
+        <label for="name">Allergy Type Name</label>
         <input name="name" type="text" value="<?= isset($rec['name']) ? $rec['name'] : '' ?>" class="form-control <?= isset($errors['name']) ? 'is-invalid':'is-valid' ?>" id="name" placeholder="Name">
           <?php if(isset($errors['name'])): ?>
             <div class="invalid-feedback">

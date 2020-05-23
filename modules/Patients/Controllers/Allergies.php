@@ -44,7 +44,7 @@ class Allergies extends BaseController
 				'allergies' => ['allergies.id' => 'patient_allergies.allergy_id'],
 				'allergy_types' => ['allergies.allergy_type_id' => 'allergy_types.id']
 			]);
-
+			$data['function_title'] = "Allergies";
     $data['viewName'] = 'Modules\Patients\Views\allergies\index';
     echo view('App\Views\theme\index', $data);
   }

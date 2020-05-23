@@ -48,14 +48,14 @@ class AllergyTypes extends BaseController
 			}else{
 				$data['errors'] = \Config\Services::validation()->getErrors();
 				$data['function_title'] = "Adding Allergy";
-				$data['viewName'] = 'Modules\SystemSettings\Views\allergies\frmAllergy';
+				$data['viewName'] = 'Modules\SystemSettings\Views\allergyTypes\frmAllergy';
 				echo view('App\Views\theme\index', $data);
 			}
 		}
 		else{
 			// die();
 			$data['function_title'] = "Adding Allergy";
-			$data['viewName'] = 'Modules\SystemSettings\Views\allergies\frmAllergy';
+			$data['viewName'] = 'Modules\SystemSettings\Views\allergyTypes\frmAllergy';
 			echo view('App\Views\theme\index', $data);
 		}
   }

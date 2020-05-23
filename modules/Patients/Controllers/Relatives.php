@@ -31,7 +31,7 @@ class Relatives extends BaseController
 		$data['vital_recorded'] = $vital_model->isVitalCaptured($data['visit_id']);
 		$data['profile'] = $patient_model->get(['status' => 'a','id' => $id]);
 		$data['relatives'] = $model->get(['status' => 'a', 'patient_id' => $id]);
-
+		$data['function_title'] = "Relatives";
     $data['viewName'] = 'Modules\Patients\Views\relatives\index';
     echo view('App\Views\theme\index', $data);
   }

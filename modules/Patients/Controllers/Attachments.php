@@ -37,6 +37,7 @@ class Attachments extends BaseController
 			'visits' => ['visits.id' => 'attachments.visit_id']
 		]);
 
+		$data['function_title'] = "Attachments";
     $data['viewName'] = 'Modules\Patients\Views\attachments\index';
     echo view('App\Views\theme\index', $data);
   }

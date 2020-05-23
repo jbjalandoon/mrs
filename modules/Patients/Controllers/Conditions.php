@@ -36,7 +36,7 @@ class Conditions extends BaseController
 		], [
 			'conditions' => ['conditions.id' => 'patient_conditions.condition_id']
 		]);
-
+		$data['function_title'] = "Condition";
     $data['viewName'] = 'Modules\Patients\Views\conditions\index';
     echo view('App\Views\theme\index', $data);
   }

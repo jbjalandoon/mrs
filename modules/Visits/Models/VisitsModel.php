@@ -7,7 +7,7 @@ class VisitsModel extends BaseModel
 {
     protected $table = 'visits';
 
-    protected $allowedFields = ['patient_id','status', 'created_at','updated_at', 'deleted_at'];
+    protected $allowedFields = ['user_id','patient_id','status', 'created_at','updated_at', 'deleted_at'];
 
     public function getVisitId($id){
       $visit_list = $this->get(['patient_id' => $id, 'status' => 'a', 'updated_at' => null]);

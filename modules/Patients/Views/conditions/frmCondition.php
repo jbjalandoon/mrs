@@ -2,7 +2,12 @@
   </div>
 </div>
 <br>
-<br>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>Adding Conditions</h1>
+    <hr>
+  </div>
+</div>
 <form action="<?= base_url() ?>patient-conditions/<?= isset($rec) ? 'edit/'.$rec['id'].'/'.$profile[0]['id'] : 'add/'.$profile[0]['id'] ?>" method="post">
   <div class="row">
     <div class="col-md-6 offset-md-3">

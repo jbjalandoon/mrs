@@ -1,5 +1,8 @@
  <div class="row">
-   <div class="col-md-2 offset-md-10">
+   <div class="col-md-6">
+     <h1>Allergies</h1>
+   </div>
+   <div class="col-md-2 offset-md-4">
     <?php user_add_link('allergies', $_SESSION['userPermmissions']) ?>
    </div>
  </div>

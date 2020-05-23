@@ -1,6 +1,9 @@
  <div class="row">
-   <div class="col-md-2 offset-md-10">
-    <?php user_add_link('allergies', $_SESSION['userPermmissions']) ?>
+   <div class="col-md-6">
+     <h1>Allergy Types</h1>
+   </div>
+   <div class="col-md-2 offset-md-4">
+    <?php user_add_link('allergy_types', $_SESSION['userPermmissions']) ?>
    </div>
  </div>
 <br>

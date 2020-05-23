@@ -24,7 +24,7 @@ $routes->group('reactions', ['namespace' => 'Modules\SystemSettings\Controllers'
 $routes->group('allergy-types', ['namespace' => 'Modules\SystemSettings\Controllers'], function($routes)
 {
     $routes->get('/', 'AllergyTypes::index');
-    $routes->match(['get', 'post'], 'AllergyTypes', 'Allergy::add');
-    $routes->match(['get', 'post'], 'AllergyTypes/(:num)', 'Allergy::edit/$1');
+    $routes->match(['get', 'post'], 'add', 'AllergyTypes::add');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'AllergyTypes::edit/$1');
     $routes->get('delete/(:num)', 'AllergyTypes::delete/$1');
 });

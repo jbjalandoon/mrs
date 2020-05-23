@@ -166,7 +166,7 @@ class Patients extends BaseController
 	    }
 	    else
 	    {
-	    	if($model->editPatients($_POST, $id))
+	    	if($model->edit($_POST, $id))
 	        {
 	        	//$permissions_model->update_permitted_role($id, $_POST['function_id'], $data['rec']['function_id']);
 	        	$_SESSION['success'] = 'You have updated a record';

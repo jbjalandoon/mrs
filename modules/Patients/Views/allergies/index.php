@@ -3,10 +3,10 @@
 </div>
 <br>
  <div class="row">
-   <!--<div class="col-md-10">
-      search here
-   </div>-->
-   <div class="col-md-3 offset-md-9">
+   <div class="col-md-4">
+     <h1> <?=$function_title?> </h1>
+   </div>
+   <div class="col-md-3 offset-md-5">
     <?php patient_detail_add_link('patient_allergies', $_SESSION['userPermmissions'], $profile[0]['id']) ?>
    </div>
  </div>
